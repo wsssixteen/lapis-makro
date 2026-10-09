@@ -1,0 +1,2192 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lapis Makro</title>
+<meta name="description" content="Sasaran kalori, protein, lemak dan karbohidrat anda, selapis demi selapis, dengan kek lapis unik anda sendiri. Calorie and macro targets in BM and English. Percuma, tanpa daftar.">
+<!-- Link previews for WhatsApp, Telegram, Facebook and X -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lapis Makro">
+<meta property="og:title" content="Lapis Makro: sasaran kalori &amp; makro, dan kek lapis anda">
+<meta property="og:description" content="Kira kalori, protein, lemak dan karbohidrat anda, selapis demi selapis. Dapatkan kek lapis unik anda. Percuma, tanpa daftar.">
+<meta property="og:url" content="https://wsssixteen.github.io/lapis-makro/">
+<meta property="og:image" content="https://wsssixteen.github.io/lapis-makro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lapis Makro: a kek lapis slice and a little kek lapis character">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:locale:alternate" content="en_MY">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBF3DD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A0F0A" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@500;700;800;900&display=swap">
+<style>
+/* Base reset (the Claude preview adds this on its own) */
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+:root{
+  /* Layout: phone = one column with a slim sticky layer bar on top (shrinks on scroll, opens into the full
+     layer stack) and Back/Next fixed at the bottom. From 860px: sticky stack on the left, layer on the right.
+     Light = kek lapis biasa (butter layers, caramel lines). Dark = kek lapis coklat. Each step keeps its own
+     bright layer colour, like a kek lapis Sarawak. */
+  --bg:#FBF3DD;
+  --surface:#FFFDF7;
+  --ink:#2E1B10;
+  --muted:#6B5240;
+  --line:#EBDCB9;
+  --accent:#6A3A1C; --on-accent:#FFF7E6; --accent-soft:#F6E3BE;
+  --cake-a:#F2C14E; --cake-b:#6A3A1C;
+  --l1:#2A7A4B; --on-l1:#FFFFFF; --l1-soft:#E2EFD8;
+  --l2:#E3A72F; --on-l2:#2A1709; --l2-soft:#FBE7B5;
+  --l3:#3F5FC4; --on-l3:#FFFFFF; --l3-soft:#E5E8F8;
+  --l4:#C93D63; --on-l4:#FFFFFF; --l4-soft:#FADFE3;
+  --protein:#D6456B; --on-protein:#FFFFFF;
+  --fat:#3F5FC4; --on-fat:#FFFFFF;
+  --carb:#B8800F; --on-carb:#1F1405;
+  --plate:#FFFDF7; --plate-edge:#E6D3AC; --plate-well:#FBF3DF; --utensil:#B7A07F;
+  --warn:#9A4512; --warn-soft:#FCE4CE;
+  --shadow:rgba(46,27,16,.16);
+  --f-display:"Libre Franklin","Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+/* Dark = kek lapis coklat */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A0F0A; --surface:#26170F; --ink:#F7EAD5; --muted:#C9AF93; --line:#432C1F;
+    --accent:#F2C14E; --on-accent:#2A170C; --accent-soft:#3D2716;
+    --cake-a:#F2C14E; --cake-b:#8A5530;
+    --l1:#6FCB92; --on-l1:#1A0F0A; --l1-soft:#22331F;
+    --l2:#F2C14E; --on-l2:#1A0F0A; --l2-soft:#3D2C12;
+    --l3:#93A9F6; --on-l3:#1A0F0A; --l3-soft:#262947;
+    --l4:#F27C98; --on-l4:#1A0F0A; --l4-soft:#401C25;
+    --protein:#D9567A; --on-protein:#160A06; --fat:#6C86E8; --on-fat:#160A06; --carb:#BB8723; --on-carb:#160A06;
+    --plate:#2E1D13; --plate-edge:#4A3122; --plate-well:#24160E; --utensil:#7A6150;
+    --warn:#F3A76F; --warn-soft:#3E2414; --shadow:rgba(0,0,0,.55);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A0F0A; --surface:#26170F; --ink:#F7EAD5; --muted:#C9AF93; --line:#432C1F;
+  --accent:#F2C14E; --on-accent:#2A170C; --accent-soft:#3D2716;
+  --cake-a:#F2C14E; --cake-b:#8A5530;
+  --l1:#6FCB92; --on-l1:#1A0F0A; --l1-soft:#22331F;
+  --l2:#F2C14E; --on-l2:#1A0F0A; --l2-soft:#3D2C12;
+  --l3:#93A9F6; --on-l3:#1A0F0A; --l3-soft:#262947;
+  --l4:#F27C98; --on-l4:#1A0F0A; --l4-soft:#401C25;
+  --protein:#D9567A; --on-protein:#160A06; --fat:#6C86E8; --on-fat:#160A06; --carb:#BB8723; --on-carb:#160A06;
+  --plate:#2E1D13; --plate-edge:#4A3122; --plate-well:#24160E; --utensil:#7A6150;
+  --warn:#F3A76F; --warn-soft:#3E2414; --shadow:rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.app{max-width:1060px;margin:0 auto;padding-inline:16px;padding-block:8px 48px}
+@media (min-width:600px){.app{padding-inline:24px}}
+/* Header */
+.top{padding-block:8px 14px}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{flex:1 1 auto;display:flex;align-items:center;gap:10px;min-width:0}
+.mascot{display:block;flex:none;color:var(--ink)}
+.mark-m{width:40px;height:40px;margin:-4px -2px -4px -4px}
+body::before{content:"";display:block;height:12px;background:repeating-linear-gradient(180deg,var(--cake-a) 0 4px,var(--cake-b) 4px 6px)}
+.name{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:900 1.3rem/1.1 var(--f-display);letter-spacing:-.01em}
+.tag{margin:8px 0 0;font-size:.875rem;line-height:1.35;color:var(--muted)}
+.tools{flex:none;display:flex;align-items:center;gap:8px}
+.lang{display:inline-flex;gap:2px;padding:3px;border:2px solid var(--ink);border-radius:999px;background:var(--surface)}
+.lang button{min-height:40px;border:0;background:transparent;border-radius:999px;padding:0 12px;font:800 .8125rem/1 var(--f-display);letter-spacing:.08em;cursor:pointer;color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.theme-btn{display:grid;place-items:center;width:44px;height:44px;border:2px solid var(--ink);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer}
+.theme-btn svg{width:20px;height:20px}
+.theme-btn .i-sun{display:none}
+.theme-btn[data-mode="dark"] .i-sun{display:block}
+.theme-btn[data-mode="dark"] .i-moon{display:none}
+@media (max-width:420px){
+  .mark-m{width:34px;height:34px}
+  .name{font-size:1.15rem}
+  .tools{gap:6px}
+  .lang button{padding:0 9px}
+  .theme-btn{width:42px;height:42px}
+}
+@media (max-width:380px){.name{font-size:1.05rem}.brand{gap:6px}.mark-m{width:30px;height:30px;margin-right:-3px}}
+
+/* Layout */
+.layout{display:grid;gap:24px}
+@media (min-width:860px){
+  .layout{grid-template-columns:290px minmax(0,1fr);gap:44px;align-items:start}
+  .progress{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}
+  .progress .pbar{display:none}
+}
+
+/* Phone layer bar */
+.pbar{display:flex;width:100%;min-height:44px;align-items:center;gap:12px;padding:8px 12px;border:2px solid var(--ink);border-radius:12px;background:var(--surface);color:var(--ink);text-align:left;cursor:pointer}
+.psegs{flex:none;display:flex;gap:4px}
+.psegs i{display:block;width:26px;height:16px;border-radius:4px;border:1.5px solid var(--line);background:repeating-linear-gradient(135deg,transparent 0 4px,var(--line) 4px 5.5px),var(--surface);transition:height .2s ease}
+.psegs i.on{border-color:transparent}
+.psegs i.on:nth-child(1){background:var(--l1)}
+.psegs i.on:nth-child(2){background:var(--l2)}
+.psegs i.on:nth-child(3){background:var(--l3)}
+.psegs i.on:nth-child(4){background:var(--l4)}
+.psegs i.cur{outline:2px solid var(--ink);outline-offset:1px}
+.psegs i{transform-origin:50% 100%}
+.psegs i.fresh{animation:segDrop .62s cubic-bezier(.3,.7,.3,1)}
+@keyframes segDrop{0%{transform:translateY(-12px);opacity:0}55%{transform:translateY(0) scale(1.14,.7);opacity:1}78%{transform:scale(.96,1.08)}100%{transform:none}}
+.ptext{flex:1;min-width:0;font-size:.9375rem;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ptext b{margin-right:6px;white-space:nowrap;font:800 .75rem/1 var(--f-display);letter-spacing:.08em;text-transform:uppercase}
+.pchev{flex:none;display:grid;place-items:center;transition:transform .2s ease}
+.pchev svg{width:18px;height:18px}
+
+@media (max-width:859px){
+  .layout{display:block}
+  .progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-16px;padding:8px 16px;background:var(--bg);border-bottom:1px solid transparent;transition:padding .2s ease,box-shadow .2s ease}
+  .progress.stuck{padding-block:5px;border-bottom-color:var(--line);box-shadow:0 6px 16px var(--shadow)}
+  .progress.stuck .pbar{padding-block:4px}
+  .progress.stuck .psegs i{height:9px}
+  .layers{display:none;position:absolute;left:16px;right:16px;top:calc(100% + 4px);max-height:70vh;overflow:auto;padding:14px;border:2px solid var(--ink);border-radius:14px;background:var(--surface);box-shadow:0 16px 32px var(--shadow)}
+  .progress.open .layers{display:block}
+  .progress.open .pchev{transform:rotate(180deg)}
+  main{margin-top:16px}
+  .app{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+}
+@media (min-width:600px) and (max-width:859px){.progress{margin-inline:-24px;padding-inline:24px}}
+@media (max-width:420px){.psegs i{width:18px}.pw{display:none}.pbar{gap:10px}}
+
+/* Kuih lapis stack, layer 1 at the bottom */
+.stack-title{margin:0;font:800 .75rem/1 var(--f-display);letter-spacing:.12em;text-transform:uppercase}
+.stack-sub{margin:5px 0 10px;font-size:.8125rem;line-height:1.35;color:var(--muted)}
+.stack{list-style:none;margin:0;padding:0;display:flex;flex-direction:column-reverse;border:2px solid var(--ink);border-radius:12px;overflow:hidden;background:var(--surface)}
+.stack li:not(:first-child){border-bottom:1.5px solid var(--ink)}
+.band{display:grid;grid-template-columns:auto minmax(5.2em,1fr) auto;align-items:center;gap:10px;width:100%;min-height:50px;padding:10px 12px;border:0;border-radius:0;text-align:left;cursor:pointer;
+  background:repeating-linear-gradient(135deg,transparent 0 7px,var(--line) 7px 8.5px),var(--surface);color:var(--muted);transition:background-color .35s ease,color .35s ease}
+.band:disabled{cursor:default}
+.stack li:nth-child(1) .band.on{background:var(--l1);color:var(--on-l1)}
+.stack li:nth-child(2) .band.on{background:var(--l2);color:var(--on-l2)}
+.stack li:nth-child(3) .band.on{background:var(--l3);color:var(--on-l3)}
+.stack li:nth-child(4) .band.on{background:var(--l4);color:var(--on-l4)}
+.band[aria-current="step"]{box-shadow:inset 0 0 0 3px var(--ink)}
+.band.on:not(:disabled):hover .bname{text-decoration:underline;text-underline-offset:3px}
+.bn{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;font:800 .75rem/1 var(--f-display)}
+.bname{min-width:0;font-weight:700}
+.bval{font:800 .875rem/1.2 var(--f-display);text-align:right;font-variant-numeric:tabular-nums}
+.band:not(.on) .bval{font:italic 400 .8125rem/1.25 var(--f-body)}
+.band{transform-origin:50% 100%}
+.band.fresh,.to-label.fresh{animation:bandDrop .66s cubic-bezier(.3,.7,.3,1)}
+@keyframes bandDrop{0%{transform:translateY(-16px);opacity:0}55%{transform:translateY(0) scaleY(.88);opacity:1}78%{transform:scaleY(1.04)}100%{transform:none}}
+.to-label{margin-top:12px;width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:48px;padding:12px 14px;border:2px solid var(--ink);border-radius:12px;background:var(--surface);color:var(--ink);font:800 .9375rem/1.2 var(--f-display);cursor:pointer}
+.to-label[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.local{margin:10px 0 0;font-size:.75rem;color:var(--muted)}
+
+/* Steps: each layer carries its own kuih colour */
+#s1,#s5{--lc:var(--l1);--on-lc:var(--on-l1);--lc-soft:var(--l1-soft)}
+#s2{--lc:var(--l2);--on-lc:var(--on-l2);--lc-soft:var(--l2-soft)}
+#s3{--lc:var(--l3);--on-lc:var(--on-l3);--lc-soft:var(--l3-soft)}
+#s4{--lc:var(--l4);--on-lc:var(--on-l4);--lc-soft:var(--l4-soft)}
+.step{min-width:0;max-width:680px}
+.eyebrow{display:inline-block;margin:0;padding:6px 10px;border-radius:6px;background:var(--lc);color:var(--on-lc);font:800 .75rem/1 var(--f-display);letter-spacing:.12em;text-transform:uppercase}
+.step h1{margin:10px 0 6px;font:800 clamp(1.65rem,1.2rem + 2vw,2.25rem)/1.08 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+.step h1:focus{outline:none}
+.sub{margin:0 0 14px;max-width:58ch;color:var(--muted)}
+.example{display:inline-block;margin:0 0 14px;padding:5px 11px;border-radius:999px;background:var(--warn-soft);color:var(--warn);font-size:.8125rem;font-weight:700}
+
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px;margin:0 0 18px}
+.fields .wide{grid-column:1/-1}
+@media (max-width:599px){.fields .f-sex,.fields .f-weight{grid-column:1/-1}}
+@media (max-width:339px){.fields{grid-template-columns:minmax(0,1fr)}}
+fieldset.field{border:0;margin:0;padding:0;min-width:0}
+.field{min-width:0}
+.flabel{display:block;margin:0 0 6px;padding:0;font-size:.9375rem;font-weight:700}
+.goal-field{max-width:280px}
+
+.num{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;height:50px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.num:focus-within{border-color:var(--accent)}
+.num button{border:0;background:var(--accent-soft);color:var(--ink);font:700 1.3rem/1 var(--f-display);cursor:pointer}
+.num button:active{filter:brightness(.95)}
+.mid{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0}
+.mid input{flex:none;width:4.4ch;min-width:0;padding:0;border:0;background:transparent;text-align:center;font:800 1.25rem/1 var(--f-display);font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+#age{width:2.8ch}
+#height{width:3.8ch}
+.mid input:focus{outline:none}
+.mid input::-webkit-outer-spin-button,.mid input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.unit{font-size:.8125rem;color:var(--muted)}
+.lu{display:none;font-weight:400;color:var(--muted)}
+@media (max-width:480px){.lu{display:inline}.num .unit{display:none}}
+.err{margin:5px 0 0;font-size:.8125rem;font-weight:700;color:var(--warn)}
+.goal-hint{margin:6px 0 0;font-size:.8125rem;color:var(--muted)}
+
+.chips{position:relative;display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:8px}
+@media (min-width:600px){.chips.c4{--cols:4}}
+.chips input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.chips label{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;min-height:52px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);font-weight:700;line-height:1.25;cursor:pointer;transition:border-color .15s ease,background-color .15s ease}
+.chips label small{font-size:.8125rem;font-weight:400;color:var(--muted)}
+.chips label{overflow-wrap:break-word}
+@media (max-width:420px){.chips label{padding:8px 9px;font-size:.9375rem}}
+.chips label:hover{border-color:var(--muted)}
+.chips input:checked+label{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.chips input:focus-visible+label{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Reward card, styled after a food label, capped with the layer's colour */
+.reward{background:var(--surface);border:2px solid var(--ink);border-radius:6px;padding:22px 16px 16px;box-shadow:inset 0 10px 0 var(--lc)}
+.r-label{margin:0;font-size:.9375rem;font-weight:700;line-height:1.3;color:var(--muted)}
+.big{margin:2px 0 0;padding-bottom:8px;border-bottom:8px solid var(--ink);font:900 clamp(2.9rem,2rem + 5vw,4.25rem)/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.big .u{font:700 1rem/1 var(--f-body);letter-spacing:0;color:var(--muted)}
+.note{margin:8px 0 0;font-size:.875rem;color:var(--muted)}
+.rows{margin:10px 0 0}
+.rows div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.rows div:first-child{border-top:0}
+.rows dt{min-width:0;color:var(--muted)}
+.rows dd{margin:0;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.alert{margin:12px 0 0;padding:10px 12px;border-radius:8px;background:var(--warn-soft);color:var(--warn);font-size:.875rem;font-weight:700}
+.tip{margin:12px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:.9375rem}
+.insight{display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:12px;align-items:start;margin:14px 0 0;padding:12px 14px;border-radius:10px;background:var(--lc-soft)}
+.insight .mascot{grid-row:1 / span 2;width:42px;height:42px}
+.insight > p{grid-column:2}
+.i-label{display:flex;align-items:center;gap:8px;margin:0 0 4px;font:800 .75rem/1 var(--f-display);letter-spacing:.1em;text-transform:uppercase}
+.insight p:last-child{margin:0}
+.fine{margin:10px 0 0;font-size:.75rem;color:var(--muted)}
+
+/* Plate */
+.plate-block{display:grid;gap:10px;margin-top:8px;padding-top:12px;border-top:8px solid var(--ink)}
+@media (min-width:540px){.plate-block{grid-template-columns:minmax(0,270px) minmax(0,1fr);align-items:center;gap:20px}}
+.plate{display:block;width:100%;max-width:300px;height:auto;margin-inline:auto}
+.pl-rim{fill:var(--plate);stroke:var(--plate-edge);stroke-width:2}
+.pl-well{fill:var(--plate-well)}
+.utensil{fill:var(--utensil)}
+.w{stroke:var(--plate);stroke-width:2.5;stroke-linejoin:round}
+.w-p{fill:var(--protein)}
+.w-f{fill:var(--fat)}
+.w-c{fill:var(--carb)}
+.wl{font:800 17px var(--f-display);text-anchor:middle;dominant-baseline:central;font-variant-numeric:tabular-nums}
+.wl-p{fill:var(--on-protein)}
+.wl-f{fill:var(--on-fat)}
+.wl-c{fill:var(--on-carb)}
+.mrows{margin:0}
+.mrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.mrow:first-child{border-top:0}
+.mrow dt{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700}
+.mrow dd{margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mrow b{font:800 1.125rem/1 var(--f-display)}
+.pct{margin-left:6px;font-size:.875rem;color:var(--muted)}
+.dot{flex:none;display:inline-block;width:12px;height:12px;border-radius:3px}
+.d-p{background:var(--protein)}
+.d-f{background:var(--fat)}
+.d-c{background:var(--carb)}
+.eq{list-style:none;display:grid;gap:8px;margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--line)}
+.eq li{display:flex;align-items:baseline;gap:10px;font-size:.9375rem}
+
+/* Actions */
+.next-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:20px}
+.next{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 22px;border:0;border-radius:999px;background:var(--accent);color:var(--on-accent);font:800 1rem/1.1 var(--f-display);cursor:pointer;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+@media (hover:hover){.next:hover{transform:translateY(-1px)}}
+.next:active{transform:scale(.96);transition-duration:.06s}
+.next:disabled{opacity:.6;cursor:progress}
+.hint{font-size:.875rem;color:var(--muted)}
+.back{min-height:48px;padding:0 6px;border:0;background:transparent;color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media (max-width:859px){
+  .next-row{position:fixed;left:0;right:0;bottom:0;z-index:25;flex-wrap:nowrap;margin:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -8px 20px var(--shadow)}
+  .next-row .hint{display:none}
+  .next-row .next{flex:1 1 auto;justify-content:center;min-width:0}
+}
+
+.status{min-height:1.5em;margin:10px 0 0;font-size:.9375rem;font-weight:700}
+.status.warn{color:var(--warn)}
+.label-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:2px solid var(--ink);border-radius:999px;background:var(--surface);color:var(--ink);font:800 .9375rem/1 var(--f-display);cursor:pointer}
+.confirm{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px;padding:12px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-weight:700}
+
+/* HTML label, shown only if the image can't be drawn */
+.np{max-width:400px;margin-top:4px;padding:10px 12px 12px;border:3px solid var(--ink);background:var(--surface)}
+.np-head{margin:0;font:900 1.75rem/1 var(--f-display);letter-spacing:-.02em;text-transform:uppercase}
+.np-head span{display:block;margin-top:3px;font-size:1rem;font-weight:800;letter-spacing:0;text-transform:none}
+.np-rule{height:1px;margin:6px 0;background:var(--ink)}
+.np-rule.thick{height:10px}
+.np-energy{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.np-energy span{font:800 1rem/1.2 var(--f-display)}
+.np-energy b{font:900 2rem/1 var(--f-display);white-space:nowrap}
+.np-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:5px 0;border-top:1px solid var(--ink);font:500 .9375rem/1.3 var(--f-display)}
+.np-rule + .np-row{border-top:0}
+.np-row b{font-weight:800;text-align:right;white-space:nowrap}
+
+.foot{max-width:70ch;margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:.8125rem;color:var(--muted)}
+.foot p{margin:0 0 6px}
+
+
+/* Final page: the person's own kek lapis, then their portions */
+.cake-stage{margin:4px 0 0;max-width:420px}
+.platter{display:grid;place-items:center;aspect-ratio:1/1;padding:9%;border-radius:28px;background:var(--plate);border:2px solid var(--plate-edge);box-shadow:0 12px 28px var(--shadow)}
+.platter{position:relative}
+.slice{position:relative;width:100%;aspect-ratio:1/1;transform:rotate(-2.5deg);filter:drop-shadow(5px 9px 0 rgba(46,27,16,.2))}
+.slice canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+.oven{position:absolute;inset:9%;display:grid}
+.oven-stack{display:flex;flex-direction:column-reverse;overflow:hidden;border:2px dashed var(--plate-edge);border-radius:4px;transform:rotate(-2.5deg)}
+.oven-stack i{display:block;flex:1 1 0;opacity:0}
+.oven.run .oven-stack i{animation:layerIn .34s cubic-bezier(.3,.7,.3,1) forwards}
+@keyframes layerIn{from{opacity:0;transform:translateY(-26px)}to{opacity:1;transform:none}}
+.cheer{position:absolute;right:-14px;top:-24px;width:60px;height:60px;pointer-events:none}
+.cheer.hide{visibility:hidden}
+.cake-cap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-top:12px}
+.cake-cap b{font:800 1.125rem/1.25 var(--f-display)}
+.cake-cap span{font:700 .875rem/1.2 var(--f-body);color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.cake-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:420px;margin-top:12px}
+.tool{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:2px;border:0;border-radius:12px;background:transparent;color:var(--ink);font:800 .8125rem/1.15 var(--f-display);text-align:center;cursor:pointer}
+.tool i{display:grid;place-items:center;width:50px;height:50px;border:2px solid var(--ink);border-radius:50%;background:var(--surface);transition:background-color .15s ease,color .15s ease,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.tool svg{width:22px;height:22px}
+.tool span{max-width:100%;overflow-wrap:anywhere}
+.tool[aria-expanded="true"] i{background:var(--ink);color:var(--bg)}
+@media (hover:hover){.tool:hover i{background:var(--accent-soft)}.tool[aria-expanded="true"]:hover i{background:var(--ink)}.opt:hover{border-color:var(--line)}.opt[aria-pressed="true"]:hover{border-color:var(--accent)}}
+.chooser{max-width:680px;margin-top:10px}
+.strip{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;margin-inline:-16px;padding:4px 16px 10px;scrollbar-width:thin}
+@media (min-width:600px){.strip{flex-wrap:wrap;overflow:visible;margin-inline:0;padding-inline:0}}
+.opt{flex:none;scroll-snap-align:start;display:grid;justify-items:center;align-content:start;gap:6px;width:86px;padding:7px 4px 8px;border:2px solid transparent;border-radius:14px;background:transparent;color:var(--ink);font:700 .75rem/1.15 var(--f-body);text-align:center;cursor:pointer}
+.opt canvas{display:block;width:68px;height:68px;border-radius:4px;box-shadow:2px 3px 0 var(--shadow)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+#r5{margin-top:22px}
+.portions{list-style:none;margin:8px 0 0;padding:0}
+.portions li{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.portions li:first-child{border-top:0}
+.portions svg{display:block;width:44px;height:44px}
+.portions .i-p{color:var(--protein)}
+.portions .i-c{color:var(--carb)}
+.portions .i-f{color:var(--fat)}
+.portions b{display:block;font:800 1.25rem/1.2 var(--f-display)}
+.portions small{display:block;margin-top:2px;font-size:.875rem;color:var(--muted)}
+.day{margin-top:10px;padding-top:12px;border-top:8px solid var(--ink)}
+.day-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0}
+.day-h span{font-weight:700;color:var(--muted)}
+.day-h b{font:900 1.5rem/1 var(--f-display);font-variant-numeric:tabular-nums}
+.mbar{display:flex;gap:3px;height:14px;margin:12px 0 10px;border-radius:7px;overflow:hidden}
+.mbar i{display:block;min-width:4px}
+.mbar .d-p,.mleg .d-p{background:var(--protein)}
+.mbar .d-f,.mleg .d-f{background:var(--fat)}
+.mbar .d-c,.mleg .d-c{background:var(--carb)}
+.mleg{list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;font-size:.9375rem}
+.mleg li{display:flex;align-items:center;gap:6px}
+.mleg b{font-variant-numeric:tabular-nums}
+.preview{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:14px;max-width:520px;margin-top:18px;padding:12px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface)}
+.preview img{display:block;width:88px;height:auto;border:1.5px solid var(--line);border-radius:6px;background:#FCF5E1}
+.pv-btn{min-height:44px;margin-top:2px;padding:0;border:0;background:transparent;color:var(--ink);font:800 .875rem/1.2 var(--f-display);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.preview.open{grid-template-columns:minmax(0,1fr)}
+.preview.open img{width:100%;max-width:440px}
+.pv-h{margin:0;font:800 .9375rem/1.25 var(--f-display)}
+.pv-s{margin:3px 0 0;font-size:.8125rem;line-height:1.35;color:var(--muted)}
+
+
+/* ---------- Motion. All of it switches off for people who ask their device for less motion. ---------- */
+.step{position:relative}
+@media (prefers-reduced-motion: no-preference){
+  /* 1. Slice: a knife in the layer's colour sweeps across and reveals the new layer */
+  .step.enter::after{content:"";position:absolute;z-index:3;top:-14px;bottom:-14px;left:-10px;right:-10px;background:var(--bg);border-left:3px solid var(--lc);pointer-events:none;animation:knife .5s cubic-bezier(.65,0,.35,1) forwards}
+  .step.enter.rev::after{border-left:0;border-right:3px solid var(--lc);animation-name:knifeRev}
+  .step.enter > :not(.next-row){animation:shiftIn .5s cubic-bezier(.2,.8,.2,1) both}
+  .step.enter.rev > :not(.next-row){animation-name:shiftInRev}
+  /* 3. Press: buttons dip and spring back */
+  .btn,.num button,.theme-btn,.lang button,.pbar,.opt{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .btn:active,.num button:active,.theme-btn:active,.lang button:active,.pbar:active,.opt:active{transform:scale(.95);transition-duration:.06s}
+  .tool:active i{transform:scale(.9);transition-duration:.06s}
+  .chips label{transition:border-color .15s ease,background-color .15s ease,transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .chips label:active{transform:scale(.97);transition-duration:.06s}
+  .chips label.pop{animation:chipPop .38s cubic-bezier(.3,1.6,.5,1)}
+  .mid input.bump{animation:bump .32s cubic-bezier(.3,1.6,.5,1)}
+  /* 4. Cake: the first slice is cut open, later changes slice in over the old cake */
+  .slice.reveal #cakeCanvas{animation:cutOpen .75s cubic-bezier(.65,0,.35,1) both}
+  .slice.swap #cakeCanvas{animation:cutOpen .46s cubic-bezier(.65,0,.35,1) both}
+  .slice.reveal::after,.slice.swap::after{content:"";position:absolute;z-index:2;top:-5%;bottom:-5%;left:0;width:3px;border-radius:2px;background:var(--accent);animation:knifeX .75s cubic-bezier(.65,0,.35,1) forwards}
+  .slice.swap::after{animation-duration:.46s}
+  .cheer.hop{animation:hop .5s cubic-bezier(.3,.7,.3,1) 2}
+  .cheer.in{animation:cheerIn .45s cubic-bezier(.3,1.6,.5,1) both}
+}
+@keyframes knife{0%{left:-10px}100%{left:calc(100% + 10px);border-left-color:transparent}}
+@keyframes knifeRev{0%{right:-10px}100%{right:calc(100% + 10px);border-right-color:transparent}}
+@keyframes shiftIn{from{transform:translateX(8px)}to{transform:none}}
+@keyframes shiftInRev{from{transform:translateX(-8px)}to{transform:none}}
+@keyframes chipPop{0%{transform:scale(.95)}100%{transform:none}}
+@keyframes bump{0%{transform:scale(1.2)}100%{transform:none}}
+@keyframes cutOpen{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes knifeX{0%{left:0;opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+@keyframes hop{0%,100%{transform:none}45%{transform:translateY(-9px)}}
+@keyframes cheerIn{from{transform:translateY(10px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <svg class="defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="m-clip"><rect x="10" y="9" width="44" height="46" rx="10"/></clipPath>
+      <g id="m-body">
+        <ellipse cx="32" cy="61" rx="15" ry="2.2" fill="rgba(46,27,16,.16)"/>
+        <rect x="19.5" y="51" width="9" height="9" rx="4.5" fill="#6A3A1C" stroke="currentColor" stroke-width="2"/>
+        <rect x="35.5" y="51" width="9" height="9" rx="4.5" fill="#6A3A1C" stroke="currentColor" stroke-width="2"/>
+        <rect x="4.5" y="31" width="8" height="12" rx="4" fill="#6A3A1C" stroke="currentColor" stroke-width="2" transform="rotate(16 8.5 37)"/>
+        <rect x="51.5" y="31" width="8" height="12" rx="4" fill="#6A3A1C" stroke="currentColor" stroke-width="2" transform="rotate(-16 55.5 37)"/>
+        <g clip-path="url(#m-clip)">
+          <rect x="10" y="9" width="44" height="46" fill="#F7D894"/>
+          <rect x="10" y="9" width="44" height="5" fill="#C46F33"/>
+          <rect x="10" y="34" width="44" height="13" fill="#F6C531"/>
+          <path d="M17 34.6l6.4 6.4-6.4 6.4-6.4-6.4zM32 34.6l6.4 6.4-6.4 6.4-6.4-6.4zM47 34.6l6.4 6.4-6.4 6.4-6.4-6.4z" fill="#1E9E57"/>
+          <path d="M17 37.8l3.2 3.2-3.2 3.2-3.2-3.2zM32 37.8l3.2 3.2-3.2 3.2-3.2-3.2zM47 37.8l3.2 3.2-3.2 3.2-3.2-3.2z" fill="#E0303F"/>
+          <path d="M10 34h44M10 47h44" stroke="#4E2610" stroke-width="1.1"/>
+          <path d="M10 50.2h44" stroke="#C9A25E" stroke-width="1"/>
+          <rect x="10" y="52" width="44" height="3" fill="#C46F33"/>
+        </g>
+        <rect x="10" y="9" width="44" height="46" rx="10" fill="none" stroke="currentColor" stroke-width="2.6"/>
+        <ellipse cx="17.5" cy="29.2" rx="3" ry="1.8" fill="#F28C28" opacity=".5"/>
+        <ellipse cx="46.5" cy="29.2" rx="3" ry="1.8" fill="#F28C28" opacity=".5"/>
+      </g>
+    </defs>
+    <symbol id="m-smile" viewBox="0 0 64 64"><use href="#m-body"/>
+      <ellipse cx="24.5" cy="23.5" rx="2.7" ry="3.4" fill="#2E1B10"/><ellipse cx="39.5" cy="23.5" rx="2.7" ry="3.4" fill="#2E1B10"/>
+      <circle cx="25.5" cy="22.2" r="1" fill="#FFFFFF"/><circle cx="40.5" cy="22.2" r="1" fill="#FFFFFF"/>
+      <path d="M28.6 28.2q3.4 3.2 6.8 0" fill="none" stroke="#2E1B10" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="m-joy" viewBox="0 0 64 64"><use href="#m-body"/>
+      <path d="M21.6 24.6q2.9-3.8 5.8 0M36.6 24.6q2.9-3.8 5.8 0" fill="none" stroke="#2E1B10" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M27.6 27.6h8.8q-.4 5.6-4.4 5.6t-4.4-5.6z" fill="#2E1B10"/>
+      <path d="M29.7 31.4q2.3-1.5 4.6 0q-.7 1.7-2.3 1.7t-2.3-1.7z" fill="#F0508A"/>
+    </symbol>
+  </svg>
+  <header class="top">
+    <div class="top-row">
+    <div class="brand">
+      <svg class="mascot mark-m" viewBox="0 0 64 64" aria-hidden="true"><use href="#m-smile"/></svg>
+      <p class="name">Lapis Makro</p>
+    </div>
+    <div class="tools">
+      <div class="lang" role="group" id="langGroup" aria-label="Bahasa">
+        <button type="button" id="lang-ms" data-lang="ms" aria-pressed="true">BM</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="theme-btn" id="themeBtn" data-mode="light">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      </button>
+    </div>
+    </div>
+    <p class="tag" data-t="tagline"></p>
+  </header>
+
+  <div id="sentinel" aria-hidden="true" style="height:1px"></div>
+
+  <div class="layout">
+    <aside class="progress" id="progress" aria-labelledby="stack-h">
+      <button type="button" class="pbar" id="pbarBtn" aria-expanded="false" aria-controls="layersPanel">
+        <span class="psegs" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="ptext"><b id="pStep"></b><span id="pName"></span></span>
+        <span class="pchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+      </button>
+      <div class="layers" id="layersPanel">
+        <p class="stack-title" id="stack-h" data-t="stackTitle"></p>
+        <p class="stack-sub" data-t="stackSub"></p>
+        <ol class="stack" id="stack">
+          <li><button type="button" class="band" id="band-1" data-go="1"></button></li>
+          <li><button type="button" class="band" id="band-2" data-go="2"></button></li>
+          <li><button type="button" class="band" id="band-3" data-go="3"></button></li>
+          <li><button type="button" class="band" id="band-4" data-go="4"></button></li>
+        </ol>
+        <button type="button" class="to-label" id="toLabel" data-go="5" hidden><span data-t="toLabel"></span><span aria-hidden="true">→</span></button>
+        <p class="local" data-t="local"></p>
+      </div>
+    </aside>
+
+    <main id="main">
+      <!-- Layer 1 -->
+      <section class="step" id="s1" aria-labelledby="s1-h">
+        <p class="eyebrow" data-t="stepOf" data-n="1"></p>
+        <h1 id="s1-h" tabindex="-1" data-t="s1Title"></h1>
+        <p class="sub" data-t="s1Sub"></p>
+        <p class="example" id="exampleBadge" data-t="example"></p>
+        <div class="fields">
+          <fieldset class="field f-sex">
+            <legend class="flabel" data-t="sex"></legend>
+            <div class="chips" style="--cols:2">
+              <input type="radio" name="sex" id="sex-m" value="m"><label for="sex-m" data-t="male"></label>
+              <input type="radio" name="sex" id="sex-f" value="f"><label for="sex-f" data-t="female"></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label class="flabel" for="age"><span data-t="age"></span><span class="lu"> · <span data-t="years"></span></span></label>
+            <div class="num">
+              <button type="button" class="step-btn" data-field="age" data-dir="-1" data-t-aria="dec">−</button>
+              <div class="mid"><input id="age" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" enterkeyhint="next" autocomplete="off"><span class="unit" data-t="years"></span></div>
+              <button type="button" class="step-btn" data-field="age" data-dir="1" data-t-aria="inc">+</button>
+            </div>
+            <p class="err" id="age-err" hidden></p>
+          </div>
+          <div class="field">
+            <label class="flabel" for="height"><span data-t="height"></span><span class="lu"> · cm</span></label>
+            <div class="num">
+              <button type="button" class="step-btn" data-field="height" data-dir="-1" data-t-aria="dec">−</button>
+              <div class="mid"><input id="height" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" enterkeyhint="next" autocomplete="off"><span class="unit">cm</span></div>
+              <button type="button" class="step-btn" data-field="height" data-dir="1" data-t-aria="inc">+</button>
+            </div>
+            <p class="err" id="height-err" hidden></p>
+          </div>
+          <div class="field f-weight">
+            <label class="flabel" for="weight"><span data-t="weight"></span><span class="lu"> · kg</span></label>
+            <div class="num">
+              <button type="button" class="step-btn" data-field="weight" data-dir="-1" data-t-aria="dec">−</button>
+              <div class="mid"><input id="weight" type="text" inputmode="decimal" maxlength="5" enterkeyhint="done" autocomplete="off"><span class="unit">kg</span></div>
+              <button type="button" class="step-btn" data-field="weight" data-dir="1" data-t-aria="inc">+</button>
+            </div>
+            <p class="err" id="weight-err" hidden></p>
+          </div>
+        </div>
+        <div class="reward" id="r1"></div>
+        <div class="next-row">
+          <button type="button" class="next" data-go="2" data-next="1"><span data-t="next1"></span><span aria-hidden="true">→</span></button>
+          <span class="hint" data-t="hint1"></span>
+        </div>
+      </section>
+
+      <!-- Layer 2 -->
+      <section class="step" id="s2" aria-labelledby="s2-h" hidden>
+        <p class="eyebrow" data-t="stepOf" data-n="2"></p>
+        <h1 id="s2-h" tabindex="-1" data-t="s2Title"></h1>
+        <p class="sub" data-t="s2Sub"></p>
+        <div class="fields">
+          <div class="field wide goal-field">
+            <label class="flabel" for="goal"><span data-t="goal"></span><span class="lu"> · kg</span></label>
+            <div class="num">
+              <button type="button" class="step-btn" data-field="goal" data-dir="-1" data-t-aria="dec">−</button>
+              <div class="mid"><input id="goal" type="text" inputmode="decimal" maxlength="5" enterkeyhint="done" autocomplete="off"><span class="unit">kg</span></div>
+              <button type="button" class="step-btn" data-field="goal" data-dir="1" data-t-aria="inc">+</button>
+            </div>
+            <p class="err" id="goal-err" hidden></p>
+            <p class="goal-hint" id="goalHint" data-t="goalHint"></p>
+          </div>
+          <fieldset class="field wide">
+            <legend class="flabel" data-t="pace"></legend>
+            <div class="chips" style="--cols:3">
+              <input type="radio" name="pace" id="pace-gentle" value="gentle"><label for="pace-gentle"><span data-t="gentle"></span><small data-t="gentleS"></small></label>
+              <input type="radio" name="pace" id="pace-steady" value="steady"><label for="pace-steady"><span data-t="steady"></span><small data-t="steadyS"></small></label>
+              <input type="radio" name="pace" id="pace-fast" value="fast"><label for="pace-fast"><span data-t="fast"></span><small data-t="fastS"></small></label>
+            </div>
+          </fieldset>
+          <fieldset class="field wide">
+            <legend class="flabel" data-t="activity"></legend>
+            <div class="chips" style="--cols:2">
+              <input type="radio" name="act" id="act-sit" value="sit"><label for="act-sit"><span data-t="sit"></span><small data-t="sitS"></small></label>
+              <input type="radio" name="act" id="act-light" value="light"><label for="act-light"><span data-t="light"></span><small data-t="lightS"></small></label>
+              <input type="radio" name="act" id="act-active" value="active"><label for="act-active"><span data-t="active"></span><small data-t="activeS"></small></label>
+              <input type="radio" name="act" id="act-very" value="very"><label for="act-very"><span data-t="very"></span><small data-t="veryS"></small></label>
+            </div>
+            <p class="goal-hint" data-t="actHint"></p>
+          </fieldset>
+        </div>
+        <div class="reward" id="r2"></div>
+        <div class="next-row">
+          <button type="button" class="back" data-go="1" data-t="back"></button>
+          <button type="button" class="next" data-go="3" data-next="1"><span data-t="next2"></span><span aria-hidden="true">→</span></button>
+          <span class="hint" data-t="hint2"></span>
+        </div>
+      </section>
+
+      <!-- Layer 3 -->
+      <section class="step" id="s3" aria-labelledby="s3-h" hidden>
+        <p class="eyebrow" data-t="stepOf" data-n="3"></p>
+        <h1 id="s3-h" tabindex="-1" data-t="s3Title"></h1>
+        <p class="sub" data-t="s3Sub"></p>
+        <div class="fields">
+          <fieldset class="field wide">
+            <legend class="flabel" data-t="train"></legend>
+            <div class="chips" style="--cols:3">
+              <input type="radio" name="train" id="train-rare" value="rare"><label for="train-rare"><span data-t="rare"></span><small data-t="rareS"></small></label>
+              <input type="radio" name="train" id="train-some" value="some"><label for="train-some"><span data-t="some"></span><small data-t="someS"></small></label>
+              <input type="radio" name="train" id="train-lots" value="lots"><label for="train-lots"><span data-t="lots"></span><small data-t="lotsS"></small></label>
+            </div>
+          </fieldset>
+          <fieldset class="field wide">
+            <legend class="flabel" data-t="style"></legend>
+            <div class="chips" style="--cols:3">
+              <input type="radio" name="style" id="style-carb" value="carb"><label for="style-carb"><span data-t="carbStyle"></span><small data-t="carbStyleS"></small></label>
+              <input type="radio" name="style" id="style-bal" value="bal"><label for="style-bal"><span data-t="bal"></span><small data-t="balS"></small></label>
+              <input type="radio" name="style" id="style-fat" value="fat"><label for="style-fat"><span data-t="fatStyle"></span><small data-t="fatStyleS"></small></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="reward" id="r3"></div>
+        <div class="next-row">
+          <button type="button" class="back" data-go="2" data-t="back"></button>
+          <button type="button" class="next" data-go="4" data-next="1"><span data-t="next3"></span><span aria-hidden="true">→</span></button>
+          <span class="hint" data-t="hint3"></span>
+        </div>
+      </section>
+
+      <!-- Layer 4 -->
+      <section class="step" id="s4" aria-labelledby="s4-h" hidden>
+        <p class="eyebrow" data-t="stepOf" data-n="4"></p>
+        <h1 id="s4-h" tabindex="-1" data-t="s4Title"></h1>
+        <p class="sub" data-t="s4Sub"></p>
+        <div class="fields">
+          <fieldset class="field wide">
+            <legend class="flabel" data-t="meals"></legend>
+            <div class="chips" style="--cols:3">
+              <input type="radio" name="meals" id="meals-2" value="2"><label for="meals-2"><span>2</span><small data-t="m2S"></small></label>
+              <input type="radio" name="meals" id="meals-3" value="3"><label for="meals-3"><span>3</span><small data-t="m3S"></small></label>
+              <input type="radio" name="meals" id="meals-4" value="4"><label for="meals-4"><span>4</span><small data-t="m4S"></small></label>
+            </div>
+          </fieldset>
+          <fieldset class="field wide">
+            <legend class="flabel" data-t="sleep"></legend>
+            <div class="chips c4" style="--cols:2">
+              <input type="radio" name="sleep" id="sleep-u6" value="u6"><label for="sleep-u6" data-t="sl1"></label>
+              <input type="radio" name="sleep" id="sleep-67" value="67"><label for="sleep-67" data-t="sl2"></label>
+              <input type="radio" name="sleep" id="sleep-78" value="78"><label for="sleep-78" data-t="sl3"></label>
+              <input type="radio" name="sleep" id="sleep-8p" value="8p"><label for="sleep-8p" data-t="sl4"></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="reward" id="r4"></div>
+        <div class="next-row">
+          <button type="button" class="back" data-go="3" data-t="back"></button>
+          <button type="button" class="next" data-go="5" data-next="1"><span data-t="next4"></span><span aria-hidden="true">→</span></button>
+          <span class="hint" data-t="hint4"></span>
+        </div>
+      </section>
+
+      <!-- Final: your cake, then your portions -->
+      <section class="step" id="s5" aria-labelledby="s5-h" hidden>
+        <p class="eyebrow" data-t="n5"></p>
+        <h1 id="s5-h" tabindex="-1" data-t="s5Title"></h1>
+        <p class="sub" data-t="s5Sub"></p>
+        <figure class="cake-stage">
+          <div class="platter">
+            <div class="slice" id="slice"><canvas id="cakeBack" width="600" height="600" aria-hidden="true"></canvas><canvas id="cakeCanvas" width="600" height="600" role="img"></canvas></div>
+            <div class="oven" id="oven" hidden aria-hidden="true"><div class="oven-stack" id="ovenStack"></div></div>
+            <svg class="mascot cheer" id="cheer" viewBox="0 0 64 64" aria-hidden="true"><use href="#m-joy"/></svg>
+          </div>
+          <figcaption class="cake-cap"><b id="cakeName"></b><span id="cakeCode"></span></figcaption>
+        </figure>
+        <div class="cake-tools" role="group" data-t-aria="chooseAria">
+          <button type="button" class="tool" id="pickPattern" aria-expanded="false" aria-controls="chooser"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M12 6.8l5.2 5.2-5.2 5.2-5.2-5.2z"/></svg></i><span data-t="pattern"></span></button>
+          <button type="button" class="tool" id="pickColour" aria-expanded="false" aria-controls="chooser"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="8" cy="8.5" r="4"/><circle cx="16" cy="8.5" r="4"/><circle cx="12" cy="15.5" r="4"/></svg></i><span data-t="colours"></span></button>
+          <button type="button" class="tool" id="rebake"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 10.5A7.6 7.6 0 0 0 6 7.2L4.5 8.7M4.5 4.5v4.2h4.2M4.5 13.5A7.6 7.6 0 0 0 18 16.8l1.5-1.5M19.5 19.5v-4.2h-4.2"/></svg></i><span data-t="another"></span></button>
+        </div>
+        <div class="chooser" id="chooser" hidden><div class="strip" id="strip" role="group"></div></div>
+        <div class="reward" id="r5"></div>
+        <div class="preview" id="cardPreview" hidden>
+          <img id="cardImg" alt="">
+          <div><p class="pv-h" data-t="previewLabel"></p><p class="pv-s" data-t="previewSub"></p><button type="button" class="pv-btn" id="pvBtn" aria-expanded="false" aria-controls="cardPreview"></button></div>
+        </div>
+        <div id="labelPanel" hidden></div>
+        <p class="status" id="saveStatus" role="status"></p>
+        <div class="label-actions">
+          <button type="button" class="btn" id="restartBtn" data-t="restart"></button>
+        </div>
+        <div class="confirm" id="confirmRow" hidden>
+          <span data-t="confirmQ"></span>
+          <button type="button" class="btn" id="confirmYes" data-t="confirmYes"></button>
+          <button type="button" class="btn" id="confirmNo" data-t="confirmNo"></button>
+        </div>
+        <div class="next-row">
+          <button type="button" class="back" data-go="4" data-t="back"></button>
+          <button type="button" class="next" id="saveBtn"><span data-t="save"></span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="foot">
+    <p data-t="disclaimer"></p>
+    <p data-t="method"></p>
+  </footer>
+  <p class="sr-only" id="live" aria-live="polite"></p>
+</div>
+
+<script>
+/*KEK-START*/
+/* Kek lapis Sarawak pattern generator, v2.
+   Built the way bakers build them: bake coloured layer sheets, cut tiles from the sheets,
+   rotate/mirror the tiles and glue them back together with jam lines, then wrap the block
+   in plain layered cake.
+   People choose the pattern and the colours. Every bake is still one of a kind.
+   Code = 8 Crockford base32 characters, shown as XXXX-XXXX:
+     character 1 = pattern, character 2 = colours, characters 3-8 = this bake (grid, layer widths, frames...).
+   design(code) is a pure function of the code. After launch, never change the order or meaning of the
+   random draws below, or everyone's saved cake changes. */
+(function(){
+'use strict';
+
+/* ---------- seeded random ---------- */
+function cyrb128(str){
+  var h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+  for (var i = 0, k; i < str.length; i++){
+    k = str.charCodeAt(i);
+    h1 = h2 ^ Math.imul(h1 ^ k, 597399067); h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+    h3 = h4 ^ Math.imul(h3 ^ k, 951274213); h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+  }
+  h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067); h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+  h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213); h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+  return [(h1 ^ h2 ^ h3 ^ h4) >>> 0, (h2 ^ h1) >>> 0, (h3 ^ h1) >>> 0, (h4 ^ h1) >>> 0];
+}
+function sfc32(a, b, c, d){
+  return function(){
+    a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+    var t = (a + b) | 0; a = b ^ (b >>> 9); b = (c + (c << 3)) | 0; c = (c << 21) | (c >>> 11);
+    d = (d + 1) | 0; t = (t + d) | 0; c = (c + t) | 0;
+    return (t >>> 0) / 4294967296;
+  };
+}
+var B32 = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+function randBytes(n){
+  var bytes = new Uint8Array(n), c = (typeof window !== 'undefined') && (window.crypto || window.msCrypto);
+  if (c && c.getRandomValues) c.getRandomValues(bytes);
+  else for (var i = 0; i < n; i++) bytes[i] = Math.floor(Math.random()*256);
+  return bytes;
+}
+function rand32(n){ var b = randBytes(n), s = ''; for (var i = 0; i < n; i++) s += B32[b[i] & 31]; return s; }
+function randIndex(n){ var b = randBytes(4), v = ((b[0] << 24) | (b[1] << 16) | (b[2] << 8) | b[3]) >>> 0; return v % n; }
+
+/* ---------- design vocabulary ---------- */
+var PALETTES = [
+  {id:'klasik',    ms:'Klasik',          en:'Classic',        c:['#E0303F', '#1E9E57', '#F6C531']},
+  {id:'seridewi',  ms:'Hijau Hitam',     en:'Green & black',  c:['#1E9E57', '#2B1A12', '#E0303F', '#F6C531']},
+  {id:'ungumerah', ms:'Ungu Merah',      en:'Purple & red',   c:['#6C3BAA', '#E0303F', '#FFF1D0']},
+  {id:'laut',      ms:'Laut',            en:'Sea',            c:['#18B2C9', '#F28C28', '#FFF1D0']},
+  {id:'pelangi',   ms:'Pelangi',         en:'Rainbow',        c:['#F0508A', '#F6C531', '#3DB35A', '#2F6FD6']},
+  {id:'pandan',    ms:'Pandan Coklat',   en:'Pandan & choc',  c:['#6DBE45', '#5A2E14', '#FFF1D0']},
+  {id:'telang',    ms:'Bunga Telang',    en:'Butterfly pea',  c:['#3557C4', '#7B3FB5', '#FFFFFF', '#F6C531']},
+  {id:'senja',     ms:'Senja',           en:'Sunset',         c:['#F28C28', '#F0508A', '#6C3BAA']},
+  {id:'hutan',     ms:'Hutan',           en:'Rainforest',     c:['#1E9E57', '#9BCB3B', '#F6C531', '#5A2E14']},
+  {id:'primer',    ms:'Primer',          en:'Primary',        c:['#E0303F', '#2F6FD6', '#F6C531']},
+  {id:'gula',      ms:'Gula Melaka',     en:'Palm sugar',     c:['#8A4B23', '#FFF1D0', '#F28C28']},
+  {id:'durian',    ms:'Durian',          en:'Durian',         c:['#C9D14A', '#1E9E57', '#FFF1D0']},
+  {id:'strawberi', ms:'Strawberi Susu',  en:'Strawberry milk',c:['#F0508A', '#FFFFFF', '#E0303F']},
+  {id:'raya',      ms:'Bunga Raya',      en:'Hibiscus',       c:['#E0303F', '#F0508A', '#1E9E57']},
+  {id:'birukuning',ms:'Biru Kuning',     en:'Blue & yellow',  c:['#2F6FD6', '#F6C531', '#FFFFFF']},
+  {id:'tehtarik',  ms:'Teh Tarik',       en:'Pulled tea',     c:['#C08A5A', '#F4E3C3', '#6B3A1C']}
+];
+/* tile kinds: D = bands by u+v (diagonal), L = by max(u,v) (squares), Q = by distance (circles),
+   H/V = straight bands, T = half triangle, S = solid. "in" = tile corner points to block centre. */
+var FAMILIES = [
+  {id:'berlian',   ms:'Berlian',     en:'Diamond',       kind:'D', toward:'in',  reps:[1, 2]},
+  {id:'anakpanah', ms:'Anak Panah',  en:'Chevron',       kind:'D', layout:'chevron', reps:[3, 5]},
+  {id:'kotak',     ms:'Kotak',       en:'Nested squares',kind:'L', toward:'in',  reps:[1, 2]},
+  {id:'papandam',  ms:'Papan Dam',   en:'Checkerboard',  kind:'S', layout:'checker'},
+  {id:'tulangikan',ms:'Tulang Ikan', en:'Herringbone',   kind:'D', layout:'herring', reps:[3, 5]},
+  {id:'anyaman',   ms:'Anyaman',     en:'Weave',         kind:'HV', layout:'weave', reps:[1, 2]},
+  {id:'bintang',   ms:'Bintang',     en:'Star',          kind:'D', toward:'out', reps:[1, 2]},
+  {id:'silang',    ms:'Silang',      en:'Cross',         kind:'L', toward:'out', reps:[1, 2]},
+  {id:'kincir',    ms:'Kincir',      en:'Pinwheel',      kind:'T', layout:'pinwheel', reps:[1, 2]},
+  {id:'bulat',     ms:'Mata Bulat',  en:'Rings',         kind:'Q', toward:'in',  reps:[2, 3]},
+  {id:'kelopak',   ms:'Kelopak',     en:'Petals',        kind:'Q', toward:'out', reps:[1, 2]}
+];
+/* what people pick from: the 11 patterns, plus "Mix", which pairs two of them */
+var PATTERNS = FAMILIES.concat([{id:'campur', ms:'Campur', en:'Mix', mix:true}]);
+var BUTTER = '#F2D49B', LAYERLINE = 'rgba(122,72,34,0.50)', CRUST = '#C46F33', JAM = '#4E2610';
+
+/* ---------- codes ---------- */
+function rawOf(code){ return String(code || '').toUpperCase().replace(/[^0-9A-Z]/g, '').replace(/O/g, '0').replace(/[IL]/g, '1').replace(/U/g, 'V'); }
+function fmt(raw){ return raw.slice(0, 4) + '-' + raw.slice(4, 8); }
+function valid(code){ var r = rawOf(code); if (r.length !== 8) return false; for (var i = 0; i < 8; i++) if (B32.indexOf(r[i]) < 0) return false; return true; }
+function parts(code){ var r = rawOf(code); return {pattern: B32.indexOf(r[0]) % PATTERNS.length, palette: B32.indexOf(r[1]) % PALETTES.length, bake: r.slice(2)}; }
+/* a brand-new cake: random pattern and colours unless given */
+function newCode(opt){
+  opt = opt || {};
+  var p = opt.pattern != null ? opt.pattern : randIndex(PATTERNS.length);
+  var c = opt.palette != null ? opt.palette : randIndex(PALETTES.length);
+  return fmt(B32[p] + B32[c] + rand32(6));
+}
+function withPattern(code, i){ var r = rawOf(code); return fmt(B32[i] + r.slice(1)); }
+function withPalette(code, i){ var r = rawOf(code); return fmt(r[0] + B32[i] + r.slice(2)); }
+/* same pattern and colours, a new bake */
+function rebake(code){ var r = rawOf(code); return fmt(r.slice(0, 2) + rand32(6)); }
+
+/* ---------- a design from a code ---------- */
+function design(code){
+  var p = parts(code), s = cyrb128('lapis-makro:v2:' + p.bake), r = sfc32(s[0], s[1], s[2], s[3]);
+  /* fixed list of draws, so changing only the pattern or the colours keeps the rest of the bake */
+  var u = []; for (var i = 0; i < 32; i++) u.push(r());
+  var pat = PATTERNS[p.pattern], pal = PALETTES[p.palette], fam = pat, mixWith = null;
+  if (pat.mix){
+    var a = Math.floor(u[0]*FAMILIES.length), b = Math.floor(u[1]*(FAMILIES.length - 1));
+    if (b >= a) b++;
+    fam = FAMILIES[a]; mixWith = FAMILIES[b];
+  }
+  var grid = u[2] < 0.3 ? 1 : (u[2] < 0.8 ? 2 : 3);
+  if (mixWith && grid === 1) grid = 2;
+  var cols = pal.c.slice();
+  for (var k = cols.length - 1, j = 0; k > 0; k--, j++){ var q = Math.floor(u[3 + j]*(k + 1)), tmp = cols[k]; cols[k] = cols[q]; cols[q] = tmp; }
+  function sheet(offset, at){
+    var n = 3 + Math.floor(u[at]*3), bands = [];
+    for (var m = 0; m < n; m++) bands.push({c: cols[(m + offset) % cols.length], w: 0.55 + u[at + 1 + m]*0.9});
+    return bands;
+  }
+  var reps = fam.reps ? fam.reps[0] + Math.floor(u[18]*(fam.reps[1] - fam.reps[0] + 1)) : 1;
+  return {
+    code: fmt(rawOf(code)), pattern: pat, patternIndex: p.pattern, paletteIndex: p.palette,
+    fam: fam, mixWith: mixWith, grid: grid, pal: pal, cols: cols,
+    sheetA: sheet(0, 6), sheetB: sheet(1, 12), reps: reps,
+    alt: u[19] < 0.6, jam: u[20] < 0.65, jamW: 1.2 + u[21]*1.4,
+    frames: u[22] < 0.4 ? 0 : (u[22] < 0.8 ? 1 : 2),
+    frameCols: [cols[Math.floor(u[23]*cols.length)], cols[Math.floor(u[24]*cols.length)]],
+    border: 0.075 + u[25]*0.045, flip: u[26] < 0.5
+  };
+}
+
+/* ---------- drawing ---------- */
+function bandsOver(sheet, range, reps){
+  var tot = 0; sheet.forEach(function(b){ tot += b.w; });
+  var out = [], t = 0, unit = range/(reps*tot);
+  for (var k = 0; k < reps; k++) sheet.forEach(function(b){ var w = b.w*unit; out.push({c: b.c, t0: t, t1: t + w}); t += w; });
+  out[out.length - 1].t1 = range + 1;
+  return out;
+}
+function region(x, kind, s, t){
+  x.beginPath();
+  if (kind === 'D'){
+    if (t <= s){ x.moveTo(0, 0); x.lineTo(t, 0); x.lineTo(0, t); }
+    else { var e = Math.min(t - s, s); x.moveTo(0, 0); x.lineTo(s, 0); x.lineTo(s, e); x.lineTo(e, s); x.lineTo(0, s); }
+  } else if (kind === 'L'){ x.rect(0, 0, Math.min(t, s), Math.min(t, s)); }
+  else if (kind === 'Q'){ x.moveTo(0, 0); x.arc(0, 0, t, 0, Math.PI/2); }
+  else if (kind === 'H'){ x.rect(0, 0, s, Math.min(t, s)); }
+  else if (kind === 'V'){ x.rect(0, 0, Math.min(t, s), s); }
+  x.closePath();
+}
+function boundary(x, kind, s, t){
+  x.beginPath();
+  if (kind === 'D'){ if (t <= s){ x.moveTo(t, 0); x.lineTo(0, t); } else { x.moveTo(s, t - s); x.lineTo(t - s, s); } }
+  else if (kind === 'L'){ x.moveTo(t, 0); x.lineTo(t, t); x.lineTo(0, t); }
+  else if (kind === 'Q'){ x.arc(0, 0, t, 0, Math.PI/2); }
+  else if (kind === 'H'){ x.moveTo(0, t); x.lineTo(s, t); }
+  else if (kind === 'V'){ x.moveTo(t, 0); x.lineTo(t, s); }
+  x.stroke();
+}
+var RANGE = {D: 2, L: 1, Q: Math.SQRT2, H: 1, V: 1};
+function lum(hex){ var n = parseInt(hex.slice(1), 16); return 0.2126*((n >> 16) & 255) + 0.7152*((n >> 8) & 255) + 0.0722*(n & 255); }
+function contrastPick(cols, against){ var best = cols[0], bd = -1; cols.forEach(function(c){ var dd = Math.abs(lum(c) - lum(against)); if (dd > bd){ bd = dd; best = c; } }); return best; }
+function bandedTile(x, kind, sheet, s, reps, d, scale){
+  var bands = bandsOver(sheet, RANGE[kind]*s, reps);
+  for (var i = bands.length - 1; i >= 0; i--){ region(x, kind, s, bands[i].t1); x.fillStyle = bands[i].c; x.fill(); }
+  if (d.jam){ x.strokeStyle = JAM; x.lineWidth = d.jamW*scale; for (var j = 1; j < bands.length; j++) boundary(x, kind, s, bands[j].t0); }
+}
+/* place a tile: corner = which corner of the tile holds the local origin (0 TL, 1 TR, 2 BR, 3 BL); rot = quarter turns */
+function tile(x, X, Y, s, opt, draw){
+  x.save(); x.beginPath(); x.rect(X, Y, s, s); x.clip();
+  if (opt.rot != null){ x.translate(X + s/2, Y + s/2); x.rotate(opt.rot*Math.PI/2); x.translate(-s/2, -s/2); }
+  else {
+    var c = opt.corner || 0;
+    x.translate(X + (c === 1 || c === 2 ? s : 0), Y + (c === 2 || c === 3 ? s : 0));
+    x.scale(c === 1 || c === 2 ? -1 : 1, c === 2 || c === 3 ? -1 : 1);
+  }
+  draw(); x.restore();
+}
+var IN = [2, 3, 0, 1], OUT = [0, 1, 2, 3]; /* corner per tile TL, TR, BR, BL */
+function block(x, X, Y, bs, fam, sheet, d, scale, bi){
+  var s = bs/2, pos = [[X, Y], [X + s, Y], [X + s, Y + s], [X, Y + s]];
+  pos.forEach(function(p, k){
+    var opt, kind = fam.kind;
+    if (fam.toward) opt = {corner: (fam.toward === 'in' ? IN : OUT)[k]};
+    else if (fam.layout === 'chevron') opt = {corner: (k === 0 || k === 3) ? (d.flip ? 1 : 0) : (d.flip ? 0 : 1)};
+    else if (fam.layout === 'herring') opt = {corner: (k === 0 || k === 2) ? 0 : 1};
+    else if (fam.layout === 'weave'){ opt = {corner: 0}; kind = (k === 0 || k === 2) ? 'H' : 'V'; }
+    else if (fam.layout === 'pinwheel') opt = {rot: k};
+    else opt = {corner: 0};
+    tile(x, p[0], p[1], s, opt, function(){
+      if (kind === 'S'){
+        var cc = [sheet[0].c, sheet[1 % sheet.length].c];
+        x.fillStyle = cc[(k + bi) % 2]; x.fillRect(0, 0, s, s);
+        x.fillStyle = cc[(k + bi + 1) % 2]; var q = s/2; x.fillRect(0, 0, q, q); x.fillRect(q, q, q, q);
+        if (d.jam){ x.strokeStyle = JAM; x.lineWidth = d.jamW*scale; x.strokeRect(0, 0, s, s); x.beginPath(); x.moveTo(q, 0); x.lineTo(q, s); x.moveTo(0, q); x.lineTo(s, q); x.stroke(); }
+      } else if (kind === 'T'){
+        x.fillStyle = contrastPick(d.cols, sheet[0].c); x.fillRect(0, 0, s, s);
+        x.save(); x.beginPath(); x.moveTo(0, 0); x.lineTo(s, 0); x.lineTo(0, s); x.closePath(); x.clip();
+        bandedTile(x, 'D', sheet, s, d.reps, d, scale); x.restore();
+        if (d.jam){ x.strokeStyle = JAM; x.lineWidth = d.jamW*scale*1.4; x.beginPath(); x.moveTo(s, 0); x.lineTo(0, s); x.stroke(); }
+      } else {
+        bandedTile(x, kind, sheet, s, d.reps, d, scale);
+      }
+    });
+  });
+  if (d.jam){ x.strokeStyle = JAM; x.lineWidth = d.jamW*scale*1.6; x.strokeRect(X, Y, bs, bs); }
+}
+function fineLayers(x, X, Y, w, h, gap, seed, lw){
+  x.fillStyle = BUTTER; x.fillRect(X, Y, w, h);
+  x.strokeStyle = LAYERLINE; x.lineWidth = lw || 2;
+  var k = 0;
+  for (var yy = Y + gap*0.6; yy < Y + h; yy += gap){
+    var ph = ((seed + k*37) % 100)/100*Math.PI*2, amp = (0.6 + ((seed*7 + k*13) % 10)/10)*gap/10;
+    x.beginPath();
+    for (var xx = X; xx <= X + w + 12; xx += 12){ var yv = yy + Math.sin(xx/70 + ph)*amp; if (xx === X) x.moveTo(xx, yv); else x.lineTo(xx, yv); }
+    x.stroke(); k++;
+  }
+}
+/* draw a whole square slice at X,Y with side S */
+function drawSlice(x, X, Y, S, d){
+  var scale = S/600;
+  x.save();
+  x.beginPath(); x.rect(X, Y, S, S); x.clip();
+  fineLayers(x, X, Y, S, S, Math.max(3, 10*scale), d.code.charCodeAt(2), Math.max(0.6, 2*scale));
+  var inset = Math.round(S*d.border), cx = X + inset, cy = Y + inset, cs = S - 2*inset;
+  for (var f = 0; f < d.frames; f++){
+    var fw = Math.round(cs*0.045);
+    x.fillStyle = d.frameCols[f]; x.fillRect(cx, cy, cs, cs);
+    if (d.jam){ x.strokeStyle = JAM; x.lineWidth = d.jamW*scale*1.6; x.strokeRect(cx, cy, cs, cs); }
+    cx += fw; cy += fw; cs -= 2*fw;
+  }
+  var bs = cs/d.grid;
+  for (var i = 0; i < d.grid; i++) for (var j = 0; j < d.grid; j++){
+    var bi = i + j, useB = d.alt && (bi % 2 === 1);
+    var fam = (d.mixWith && bi % 2 === 1) ? d.mixWith : d.fam;
+    block(x, cx + j*bs, cy + i*bs, bs, fam, useB ? d.sheetB : d.sheetA, d, scale, bi);
+  }
+  x.strokeStyle = JAM; x.lineWidth = Math.max(1, 3*scale); x.strokeRect(cx, cy, cs, cs);
+  x.restore();
+  x.strokeStyle = CRUST; x.lineWidth = Math.max(1.5, 6*scale); x.strokeRect(X, Y, S, S);
+}
+function describe(d, lang){
+  var L = lang === 'en' ? 'en' : 'ms';
+  return {name: d.mixWith ? d.fam[L] + ' × ' + d.mixWith[L] : d.fam[L], pattern: d.pattern[L], palette: d.pal[L]};
+}
+window.KekLapis = {design: design, drawSlice: drawSlice, describe: describe, newCode: newCode, rebake: rebake,
+  withPattern: withPattern, withPalette: withPalette, parts: parts, valid: valid,
+  PATTERNS: PATTERNS, PALETTES: PALETTES, FAMILIES: FAMILIES};
+})();
+
+/* Saved picture, 1080 × 1350: the person's own kek lapis on top, their portions underneath. Needs kek2.js. */
+(function(){
+'use strict';
+var W = 1080, H = 1350, M = 72;
+var FD = '"Libre Franklin","Arial Narrow",Arial,sans-serif';
+var FB = '"Atkinson Hyperlegible","Segoe UI",Roboto,Arial,sans-serif';
+var C = {bg:'#FCF5E1', ink:'#2E1B10', muted:'#6B5240', choco:'#6A3A1C', line:'#E6DDCB', tile:'#FFFDF7', crust:'#C46F33',
+         p:'#D6456B', f:'#3F5FC4', c:'#B8800F'};
+var L = {
+  ms: {unit:'kcal sehari', p:'Protein', f:'Lemak', c:'Karbo', each:'SETIAP HIDANGAN · {n} SEHARI',
+       palm:'tapak tangan', rice:'cawan nasi', oil:'sudu minyak',
+       pSub:'protein · {g} g', cSub:'karbo · {g} g', fSub:'lemak · {g} g',
+       mealK:'≈ {k} kcal setiap hidangan', by:'menjelang', keep:'kekalkan berat',
+       made:'Dapatkan kek & sasaran anda di', madeNoSite:'Dibuat dengan Lapis Makro',
+       disc:'Anggaran untuk orang dewasa yang sihat, bukan nasihat perubatan.'},
+  en: {unit:'kcal a day', p:'Protein', f:'Fat', c:'Carbs', each:'EACH MEAL · {n} A DAY',
+       palm:'palms', rice:'cups of rice', oil:'tbsp of oil',
+       pSub:'protein · {g} g', cSub:'carbs · {g} g', fSub:'fat · {g} g',
+       mealK:'≈ {k} kcal a meal', by:'by', keep:'keep my weight',
+       made:'Get your cake & targets at', madeNoSite:'Made with Lapis Makro',
+       disc:'Estimates for healthy adults, not medical advice.'}
+};
+function half(v){ var n = Math.max(0.5, Math.round(v*2)/2), w = Math.floor(n); return (w ? String(w) : '') + (n > w ? '½' : ''); }
+function Ctx(cv){ this.x = cv.getContext('2d'); this.boxes = []; this.obstacles = []; }
+Ctx.prototype.text = function(s, X, Y, font, color, align){
+  var x = this.x; x.font = font; x.fillStyle = color; x.textAlign = align || 'left'; x.textBaseline = 'alphabetic';
+  x.fillText(s, X, Y);
+  var m = x.measureText(s), w = m.width, left = align === 'center' ? X - w/2 : (align === 'right' ? X - w : X);
+  this.boxes.push({s:s, l:left, r:left + w, t:Y - (m.actualBoundingBoxAscent || 0), b:Y + (m.actualBoundingBoxDescent || 0)});
+  return w;
+};
+Ctx.prototype.width = function(s, font){ this.x.font = font; return this.x.measureText(s).width; };
+/* shrink a font until the text fits */
+Ctx.prototype.fit = function(s, weight, size, family, max){ while (size > 14 && this.width(s, weight + ' ' + size + 'px ' + family) > max) size -= 1; return weight + ' ' + size + 'px ' + family; };
+function rr(x, X, Y, w, h, r){
+  x.beginPath(); x.moveTo(X + r, Y); x.lineTo(X + w - r, Y); x.quadraticCurveTo(X + w, Y, X + w, Y + r);
+  x.lineTo(X + w, Y + h - r); x.quadraticCurveTo(X + w, Y + h, X + w - r, Y + h); x.lineTo(X + r, Y + h);
+  x.quadraticCurveTo(X, Y + h, X, Y + h - r); x.lineTo(X, Y + r); x.quadraticCurveTo(X, Y, X + r, Y); x.closePath();
+}
+function topBand(x){
+  x.fillStyle = C.crust; x.fillRect(0, 0, W, 16);
+  x.fillStyle = '#F2D49B'; x.fillRect(0, 16, W, 74);
+  x.strokeStyle = 'rgba(122,72,34,0.5)'; x.lineWidth = 2;
+  for (var y = 22; y < 90; y += 9){ x.beginPath(); for (var X = 0; X <= W; X += 12){ var yy = y + Math.sin(X/70 + y)*1.1; if (!X) x.moveTo(X, yy); else x.lineTo(X, yy); } x.stroke(); }
+  x.fillStyle = 'rgba(122,72,34,0.45)'; x.fillRect(0, 88, W, 3);
+}
+/* icons, drawn in a 56 × 56 box */
+function iconPalm(x, X, Y, col){
+  x.save(); x.translate(X, Y); x.fillStyle = col;
+  [[13, 9], [20.5, 4], [28, 4], [35.5, 9]].forEach(function(f){ rr(x, f[0], f[1], 6.6, 30, 3.3); x.fill(); });
+  rr(x, 12, 24, 31, 28, 10); x.fill();
+  x.save(); x.translate(14, 40); x.rotate(-0.85); rr(x, -3.6, -21, 7.2, 22, 3.6); x.fill(); x.restore();
+  x.restore();
+}
+function iconRice(x, X, Y, col){
+  x.save(); x.translate(X, Y);
+  x.fillStyle = '#FFFFFF'; x.strokeStyle = col; x.lineWidth = 3;
+  x.beginPath(); x.arc(28, 30, 19, Math.PI, 0); x.closePath(); x.fill(); x.stroke();
+  x.fillStyle = col;
+  [[21, 20], [29, 15], [36, 21], [26, 26]].forEach(function(g){ x.beginPath(); x.ellipse(g[0], g[1], 2.6, 1.5, 0.5, 0, Math.PI*2); x.fill(); });
+  x.beginPath(); x.moveTo(4, 29); x.lineTo(52, 29); x.quadraticCurveTo(50, 49, 28, 50); x.quadraticCurveTo(6, 49, 4, 29); x.closePath(); x.fill();
+  rr(x, 19, 49, 18, 5, 2.5); x.fill();
+  x.restore();
+}
+function iconSpoon(x, X, Y, col){
+  x.save(); x.translate(X, Y); x.fillStyle = col; x.strokeStyle = col; x.lineCap = 'round';
+  x.save(); x.translate(19, 20); x.rotate(-0.78); x.beginPath(); x.ellipse(0, 0, 11, 15, 0, 0, Math.PI*2); x.fill(); x.restore();
+  x.lineWidth = 7; x.beginPath(); x.moveTo(27, 29); x.lineTo(50, 52); x.stroke();
+  x.fillStyle = 'rgba(255,255,255,0.55)'; x.save(); x.translate(17, 18); x.rotate(-0.78); x.beginPath(); x.ellipse(0, 0, 5, 7.5, 0, 0, Math.PI*2); x.fill(); x.restore();
+  x.restore();
+}
+function draw(cv, D, code){
+  var c = new Ctx(cv), x = c.x, T = L[D.lang] || L.ms, d = KekLapis.design(code), info = KekLapis.describe(d, D.lang);
+  x.fillStyle = C.bg; x.fillRect(0, 0, W, H);
+  topBand(x);
+  // brand + code
+  c.text('Lapis Makro', M, 154, '800 34px ' + FD, C.ink);
+  var cf = '700 24px ' + FB, cw = c.width('#' + d.code, cf) + 36;
+  rr(x, W - M - cw, 118, cw, 48, 24); x.lineWidth = 2.5; x.strokeStyle = C.choco; x.stroke();
+  c.text('#' + d.code, W - M - cw/2, 150, cf, C.choco, 'center');
+  // platter + slice
+  var PX = 150, PY = 196, PW = 780, PH = 548;
+  x.fillStyle = 'rgba(46,27,16,0.12)'; rr(x, PX + 6, PY + 12, PW, PH, 60); x.fill();
+  x.fillStyle = '#FFFFFF'; rr(x, PX, PY, PW, PH, 60); x.fill(); x.lineWidth = 3; x.strokeStyle = '#E6DDCB'; x.stroke();
+  x.lineWidth = 2; x.strokeStyle = '#F1EBDF'; rr(x, PX + 20, PY + 20, PW - 40, PH - 40, 44); x.stroke();
+  var S = 460, cx = W/2, cy = PY + PH/2, ang = -2.5*Math.PI/180;
+  x.save(); x.translate(cx, cy); x.rotate(ang); x.translate(-cx, -cy);
+  x.fillStyle = 'rgba(46,27,16,0.18)'; x.fillRect(cx - S/2 + 7, cy - S/2 + 12, S, S);
+  KekLapis.drawSlice(x, cx - S/2, cy - S/2, S, d);
+  x.restore();
+  c.obstacles.push({name:'platter', l:PX, t:PY, r:PX + PW, b:PY + PH + 12});
+  // pattern caption
+  var cap = info.name + '  ·  ' + info.palette;
+  c.text(cap, W/2, 800, c.fit(cap, '800', 32, FD, W - 2*M), C.ink, 'center');
+  // calories
+  var nf = '900 84px ' + FD, uf = '700 30px ' + FB, nw = c.width(D.kcalText, nf), uw = c.width(T.unit, uf), left = W/2 - (nw + 14 + uw)/2;
+  c.text(D.kcalText, left, 900, nf, C.ink);
+  c.text(T.unit, left + nw + 14, 900, uf, C.muted);
+  // to-scale macro bar + labels
+  var bx = M, bw = W - 2*M, by = 926, bh = 30, segs = [[D.pp, C.p, T.p, D.p], [D.pf, C.f, T.f, D.f], [D.pc, C.c, T.c, D.c]], sx = bx, mids = [];
+  x.save(); rr(x, bx, by, bw, bh, 15); x.clip();
+  segs.forEach(function(s, i){ var w = bw*s[0]/100; x.fillStyle = s[1]; x.fillRect(sx, by, w, bh); if (i){ x.fillStyle = C.bg; x.fillRect(sx - 2, by, 4, bh); } mids.push(sx + w/2); sx += w; });
+  x.restore();
+  var lf = '800 26px ' + FD, widths = segs.map(function(s){ return c.width(s[2] + ' ' + s[3] + ' g', lf) + 24; });
+  var xs = mids.slice();
+  for (var it = 0; it < 40; it++) for (var j = 1; j < 3; j++){ var need = (widths[j - 1] + widths[j])/2 + 22; if (xs[j] - xs[j - 1] < need){ var dd = (need - (xs[j] - xs[j - 1]))/2; xs[j - 1] -= dd; xs[j] += dd; } }
+  var lo = M + widths[0]/2, hi = W - M - widths[2]/2, shift = 0;
+  if (xs[0] < lo) shift = lo - xs[0]; if (xs[2] + shift > hi) shift = hi - xs[2];
+  xs = xs.map(function(v){ return v + shift; });
+  segs.forEach(function(s, i){
+    var lx = xs[i] - widths[i]/2;
+    x.fillStyle = s[1]; rr(x, lx, 984, 15, 15, 4); x.fill();
+    c.text(s[2] + ' ' + s[3] + ' g', lx + 24, 998, lf, C.ink);
+  });
+  // portions per meal
+  var head = T.each.replace('{n}', D.meals);
+  c.text(head, M, 1056, '800 22px ' + FD, C.muted);
+  var hw = c.width(head, '800 22px ' + FD);
+  x.fillStyle = C.line; x.fillRect(M + hw + 16, 1048, W - 2*M - hw - 16, 2);
+  var tw = (W - 2*M - 2*18)/3, ty = 1074, th = 118;
+  var tiles = [
+    {icon: iconPalm, col: C.p, big: half(D.palms), unit: T.palm, sub: T.pSub.replace('{g}', D.mealP)},
+    {icon: iconRice, col: C.c, big: half(D.rice), unit: T.rice, sub: T.cSub.replace('{g}', D.mealC)},
+    {icon: iconSpoon, col: C.f, big: half(D.oil), unit: T.oil, sub: T.fSub.replace('{g}', D.mealF)}
+  ];
+  tiles.forEach(function(tl, i){
+    var X = M + i*(tw + 18);
+    rr(x, X, ty, tw, th, 18); x.fillStyle = C.tile; x.fill(); x.lineWidth = 2.5; x.strokeStyle = C.line; x.stroke();
+    tl.icon(x, X + 14, ty + 31, tl.col);
+    var tx = X + 82, room = tw - 82 - 12;
+    var bf = '900 40px ' + FD, bwid = c.width(tl.big, bf);
+    c.text(tl.big, tx, ty + 52, bf, C.ink);
+    c.text(tl.unit, tx + bwid + 8, ty + 52, c.fit(tl.unit, '800', 22, FD, room - bwid - 8), C.ink);
+    c.text(tl.sub, tx, ty + 88, c.fit(tl.sub, '700', 21, FB, room), C.muted);
+  });
+  // per meal kcal + goal
+  var goal = D.mode === 'keep' ? T.keep : D.goalDelta + (D.goalWhen ? ' ' + T.by + ' ' + D.goalWhen : '');
+  var line = T.mealK.replace('{k}', D.mealKcal) + '  ·  ' + goal;
+  c.text(line, W/2, 1240, c.fit(line, '700', 26, FB, W - 2*M), C.ink, 'center');
+  var made = D.site ? T.made + ' ' + D.site : T.madeNoSite;
+  c.text(made, W/2, 1296, c.fit(made, '800', 26, FD, W - 2*M), C.choco, 'center');
+  c.text(T.disc, W/2, 1330, '400 20px ' + FB, C.muted, 'center');
+  return c;
+}
+function check(c, name){
+  var issues = [];
+  c.boxes.forEach(function(b){ if (b.l < 24 || b.r > W - 24 || b.t < 8 || b.b > H - 8) issues.push(name + ': edge "' + b.s + '"'); });
+  for (var i = 0; i < c.boxes.length; i++) for (var j = i + 1; j < c.boxes.length; j++){
+    var a = c.boxes[i], b = c.boxes[j];
+    if (a.l < b.r - 1 && b.l < a.r - 1 && a.t < b.b - 1 && b.t < a.b - 1) issues.push(name + ': "' + a.s + '" overlaps "' + b.s + '"');
+  }
+  c.boxes.forEach(function(b){ c.obstacles.forEach(function(o){ if (b.l < o.r && o.l < b.r && b.t < o.b && o.t < b.b) issues.push(name + ': "' + b.s + '" touches ' + o.name); }); });
+  return issues;
+}
+window.KekCard = {draw: draw, check: check, half: half, icons: {palm: iconPalm, rice: iconRice, spoon: iconSpoon}};
+})();
+
+/*KEK-END*/
+</script>
+<script>
+(function(){
+'use strict';
+
+var T = {
+  ms: {
+    tagline:"Sasaran kalori & makro untuk turun, kekal atau naik berat. Selapis demi selapis.",
+    langLabel:"Bahasa", toDark:"Tukar ke kek coklat (gelap)", toLight:"Tukar ke kek mentega (cerah)",
+    stackTitle:"Lapisan anda",
+    stackSub:"Setiap langkah menambah satu lapisan. Ketik lapisan yang siap untuk mengubahnya.",
+    local:"Angka anda disimpan pada peranti ini sahaja.",
+    n1:"Asas", n2:"Matlamat", n3:"Makro", n4:"Hidangan", n5:"Kek anda",
+    stepShort:"Lapisan {n}/4", stepWord:"Lapisan", doneShort:"Siap",
+    pbarAria:"{s}: {name}. Tunjuk semua lapisan",
+    lock1:"", lock2:"Tarikh capai sasaran", lock3:"Protein, lemak, karbo", lock4:"Protein setiap hidangan",
+    bandBurn:"Bakar {x} kcal", bandEat:"Makan {x} kcal", bandMacro:"P {p} · L {f} · K {c} g", bandMeal:"{x} g protein/hidangan",
+    toLabel:"Lihat kek lapis anda",
+    stepOf:"Lapisan {n} daripada 4",
+    s1Title:"Mula dengan asas",
+    s1Sub:"Tiga nombor dan satu ketikan. Keputusan dikemas kini semasa anda menaip.",
+    example:"Nilai contoh. Tukar kepada nilai anda.",
+    sex:"Jantina", male:"Lelaki", female:"Perempuan",
+    age:"Umur", years:"tahun", height:"Tinggi", weight:"Berat",
+    dec:"Kurangkan", inc:"Tambah",
+    errRange:"Masukkan {min}–{max}", errAdult:"Kalkulator ini untuk orang dewasa 18 tahun ke atas.",
+    r1Label:"Badan anda membakar kira-kira", kcalDay:"kcal sehari",
+    assume:"Andaian: anda banyak duduk. Anda boleh perhalusi di lapisan 2.",
+    basedOn:"Berdasarkan aktiviti anda: {a}.",
+    steadyLose:"Untuk turun berat secara stabil", perDay:"{x} kcal sehari",
+    protein:"Protein", protVal:"{g} g sehari",
+    bmi:"BMI", bmiVal:"{b} · {cat}",
+    cat_under:"bawah julat sihat", cat_healthy:"dalam julat sihat", cat_above:"atas julat sihat",
+    bmiNote:"Julat BMI sihat untuk orang dewasa di Malaysia ialah 18.5–22.9.",
+    goodToKnow:"Tahukah anda?",
+    i1:"{p}% daripada pembakaran itu berlaku semasa rehat, sekadar untuk memastikan badan berfungsi. Lebih banyak bergerak menaikkan bakinya.",
+    underNote:"BMI anda di bawah 18.5. Lapis Makro tidak akan menetapkan sasaran turun berat, tetapi lapisan 2 mencadangkan sasaran naik berat secara perlahan.",
+    underKeep:"BMI anda di bawah 18.5, jadi kami tidak merancang penurunan berat. Berat anda dikekalkan. Jika mahu turun berat, dapatkan nasihat doktor dahulu.",
+    steadyGain:"Untuk naik berat secara stabil",
+    next1:"Seterusnya: matlamat", hint1:"3 ketikan, lebih kurang 20 saat",
+    s2Title:"Tetapkan matlamat", s2Sub:"Pilih berat sasaran, kadar dan tahap aktiviti anda.",
+    goal:"Berat sasaran", goalHint:"Cadangan sasaran pertama. Tukar jika mahu.",
+    pace:"Kadar", gentle:"Perlahan", gentleS:"paling mudah dikekalkan", steady:"Sederhana", steadyS:"pilihan biasa", fast:"Laju", fastS:"lebih rasa lapar",
+    activity:"Aktiviti harian",
+    sit:"Banyak duduk", sitS:"kerja pejabat, jarang bersenam",
+    light:"Aktif ringan", lightS:"berjalan, bersenam 1–3× seminggu",
+    active:"Aktif", activeS:"banyak berdiri, bersenam 3–5× seminggu",
+    very:"Sangat aktif", veryS:"kerja fizikal atau berlatih setiap hari",
+    r2Lose:"Makan kira-kira", r2Keep:"Untuk kekal pada berat sekarang, makan kira-kira", r2Gain:"Untuk naik berat secara stabil, makan kira-kira",
+    change:"Perubahan dijangka", perWeek:"≈ {x} kg seminggu", noChange:"Tiada",
+    reach:"Capai {g} kg", around:"sekitar {d}", weeksN:"{n} minggu",
+    slow:"Sangat perlahan pada tetapan ini",
+    cut:"Pengurangan harian", cutVal:"{x} kcal ≈ {n} set roti canai + teh tarik", cutOnly:"{x} kcal",
+    orLater:"atau lebih lewat", rangeNote:"Tarikh kedua mengambil kira badan yang membakar sedikit kurang semasa berdiet.",
+    periodHead:"Haid dan penimbang", periodTip:"Sasaran anda kekal sama sepanjang bulan. Sebelum dan semasa haid, berat boleh naik 0.5–1 kg. Itu air, bukan lemak, dan ia turun semula dalam seminggu. Lebih lapar sebelum haid juga normal. Bandingkan purata mingguan, atau titik yang sama dalam kitaran.",
+    actHint:"Tak pasti? Pilih yang lebih rendah.", baking:"Membakar kek anda…", previewOpen:"Lihat gambar penuh", previewClose:"Kecilkan gambar",
+    floorNote:"Kami kekalkan sasaran pada {x} kcal supaya tidak terlalu rendah. Lebih banyak bergerak akan mempercepat kemajuan.",
+    noRoomNote:"Pembakaran harian anda sudah hampir dengan pengambilan minimum yang selamat, jadi kami tidak mengurangkannya lagi. Tambah aktiviti ialah cara terbaik.",
+    clampNote:"Sasaran itu di bawah berat sihat untuk ketinggian anda. Kami gunakan {x} kg.",
+    i2Lose:"Minggu pertama boleh turun lebih cepat kerana air, kemudian perlahan. Tiada perubahan selepas 4 minggu? Makan 100–200 kcal kurang atau bergerak lebih. Semak semula angka anda setiap 4–5 kg.",
+    i2Keep:"Mengekalkan berat juga satu matlamat. Timbang beberapa kali seminggu dan lihat purata mingguan, bukan angka harian.",
+    i2Gain:"Naik berat perlahan-lahan, kekalkan protein tinggi dan buat latihan kekuatan supaya lebih banyak menjadi otot, bukan lemak.",
+    next2:"Seterusnya: makro", hint2:"2 ketikan",
+    s3Title:"Bahagikan kepada makro", s3Sub:"Dua ketikan. Protein diutamakan. Karbohidrat dan lemak mengisi selebihnya.",
+    train:"Latihan kekuatan",
+    rare:"Jarang", rareS:"atau tidak pernah", some:"1–2× seminggu", someS:"sedikit", lots:"3+ seminggu", lotsS:"angkat berat kerap",
+    style:"Pinggan anda lebih kepada",
+    carbStyle:"Nasi & roti", carbStyleS:"lebih karbohidrat", bal:"Seimbang", balS:"sedikit semuanya", fatStyle:"Daging, telur & minyak", fatStyleS:"kurang karbohidrat",
+    r3Label:"Pinggan anda sehari, ikut kalori",
+    plateAria:"Pinggan ikut kalori: protein {p}%, lemak {f}%, karbohidrat {c}%",
+    mProtein:"Protein", mFat:"Lemak", mCarb:"Karbohidrat",
+    eqP:"≈ {n} hidangan sebesar tapak tangan (ayam, ikan atau tempe) sepanjang hari",
+    eqC:"≈ {n} cawan nasi (1 cawan = 2 senduk), jika semuanya daripada nasi",
+    eqF:"≈ {n} sudu besar minyak masak secara keseluruhan, termasuk yang sedia ada dalam makanan",
+    i3:"Nisbah karbohidrat dan lemak jauh kurang penting berbanding jumlah kalori. Dalam kajian selama setahun, diet rendah lemak dan rendah karbohidrat menurunkan berat yang hampir sama.",
+    next3:"Seterusnya: hidangan", hint3:"2 ketikan",
+    s4Title:"Jadikan hidangan", s4Sub:"Lapisan terakhir. Cara anda makan dan tidur.",
+    meals:"Hidangan sehari", m2S:"cth. puasa berselang 16:8", m3S:"kebiasaan", m4S:"dengan snek",
+    sleep:"Tidur kebanyakan malam", sl1:"Bawah 6 jam", sl2:"6–7 jam", sl3:"7–8 jam", sl4:"8 jam ke atas",
+    r4Label:"Protein setiap hidangan",
+    palmsNote:"≈ {n} hidangan sebesar tapak tangan",
+    mealKcal:"Kalori setiap hidangan", mealKcalVal:"≈ {x} kcal",
+    ifTip:"Makan dalam tempoh tertentu berkesan kerana membantu anda makan kurang. Muatkan jumlah harian yang sama dalam tempoh itu.",
+    i4Short:"Kurang tidur semasa berdiet menjejaskan otot. Dalam satu kajian kecil selama 2 minggu, mereka yang tidur 5.5 jam berbanding 8.5 jam dengan diet yang sama kehilangan 55% kurang lemak.",
+    i4Ok:"Bagus. Tidur tujuh jam atau lebih membantu mengekalkan otot dan mengawal rasa lapar semasa berdiet.",
+    next4:"Dapatkan kek lapis saya", hint4:"Kek unik dan sasaran anda",
+    s5Title:"Kek lapis anda", s5Sub:"Dibakar khas untuk anda, dan tiada yang sama. Tukar corak atau warna sesuka hati.",
+    chooseAria:"Ubah kek anda", pattern:"Corak", colours:"Warna", another:"Bakar lain",
+    patternList:"Pilih corak", colourList:"Pilih warna", cakeAlt:"Kek lapis anda: corak {n}, warna {c}.",
+    eachMeal:"Setiap hidangan · {n} sehari",
+    palmN:"{n} tapak tangan", palmSub:"protein · {g} g", riceN:"{n} cawan nasi", riceSub:"karbohidrat · {g} g",
+    oilN:"{n} sudu besar minyak", oilSub:"lemak · {g} g", perDay:"Sehari", goalRow:"Matlamat", goalBy:"{d} menjelang {w}", goalKeep:"Kekalkan berat",
+    portionNote:"Nasi dan minyak hanyalah panduan kasar, seolah-olah semua karbohidrat datang daripada nasi dan semua lemak daripada minyak.",
+    previewLabel:"Gambar yang akan disimpan", previewSub:"Kek dan sasaran anda dalam satu gambar, sedia untuk galeri atau media sosial.",
+    save:"Simpan gambar", saving:"Menyediakan gambar…",
+    savedOk:"Gambar disimpan.", downloaded:"Gambar dimuat turun.", sharedOk:"Siap.",
+    longPress:"Butang simpan tidak berfungsi di sini. Tekan lama atau klik kanan pada gambar untuk menyimpannya.",
+    saveFail:"Gambar tidak dapat dihasilkan. Ambil tangkapan skrin label di bawah.",
+    cardAlt:"Kek lapis {n}, {pal}. Sasaran harian: {k} kcal, protein {p} g, lemak {f} g, karbohidrat {c} g. Setiap hidangan: {m} g protein.",
+    restart:"Mula semula", confirmQ:"Padam semua angka anda?", confirmYes:"Ya, padam", confirmNo:"Simpan",
+    back:"Kembali",
+    disclaimer:"Anggaran untuk orang dewasa yang sihat, bukan nasihat perubatan. Hamil, menyusu, bawah 18 tahun, atau ada masalah kesihatan seperti PCOS atau diabetes? Dapatkan nasihat doktor atau pakar diet dahulu. Kalkulator ini tidak sesuai digunakan semasa hamil.",
+    method:"Kaedah: persamaan Mifflin-St Jeor × tahap aktiviti RNI Malaysia 2017 (1.4–2.0). Pengurangan paling banyak 750 kcal sehari, seperti CPG Pengurusan Obesiti 2023. Protein 1.2–2.0 g sekilogram. 7,700 kcal ≈ 1 kg berat badan. Sukatan hidangan KKM."
+  },
+  en: {
+    tagline:"Calorie and macro targets to lose, keep or gain weight. One layer at a time.",
+    langLabel:"Language", toDark:"Switch to chocolate (dark)", toLight:"Switch to butter (light)",
+    stackTitle:"Your layers",
+    stackSub:"Each step adds a layer. Tap a finished layer to change it.",
+    local:"Your numbers are saved on this device only.",
+    n1:"Basics", n2:"Goal", n3:"Macros", n4:"Meals", n5:"Your cake",
+    stepShort:"Layer {n}/4", stepWord:"Layer", doneShort:"Done",
+    pbarAria:"{s}: {name}. Show all layers",
+    lock1:"", lock2:"Your finish date", lock3:"Protein, fat, carbs", lock4:"Protein per meal",
+    bandBurn:"Burn {x} kcal", bandEat:"Eat {x} kcal", bandMacro:"P {p} · F {f} · C {c} g", bandMeal:"{x} g protein/meal",
+    toLabel:"See your kek lapis",
+    stepOf:"Layer {n} of 4",
+    s1Title:"Start with the basics",
+    s1Sub:"Three numbers and one tap. Your results update as you type.",
+    example:"Example values. Change them to yours.",
+    sex:"Sex", male:"Male", female:"Female",
+    age:"Age", years:"years", height:"Height", weight:"Weight",
+    dec:"Decrease", inc:"Increase",
+    errRange:"Enter {min}–{max}", errAdult:"This calculator is for adults 18 and over.",
+    r1Label:"Your body burns about", kcalDay:"kcal a day",
+    assume:"Assumes you mostly sit. You'll fine-tune this in layer 2.",
+    basedOn:"Based on your activity: {a}.",
+    steadyLose:"To lose weight steadily", perDay:"{x} kcal a day",
+    protein:"Protein", protVal:"{g} g a day",
+    bmi:"BMI", bmiVal:"{b} · {cat}",
+    cat_under:"below the healthy range", cat_healthy:"in the healthy range", cat_above:"above the healthy range",
+    bmiNote:"Malaysia's healthy BMI range for adults is 18.5–22.9.",
+    goodToKnow:"Good to know",
+    i1:"{p}% of that burn happens at rest, just keeping you alive. Moving more is how you raise the rest.",
+    underNote:"Your BMI is under 18.5. Lapis Makro won't set a weight-loss target, but layer 2 suggests a gentle gain goal.",
+    underKeep:"Your BMI is under 18.5, so we won't plan a weight loss and kept your weight steady. If you want to lose weight, check with a doctor first.",
+    steadyGain:"To gain weight steadily",
+    next1:"Next: your goal", hint1:"3 taps, about 20 seconds",
+    s2Title:"Set your goal", s2Sub:"Pick a goal weight, a pace and how active you are.",
+    goal:"Goal weight", goalHint:"Suggested first milestone. Change it if you like.",
+    pace:"Pace", gentle:"Gentle", gentleS:"easiest to keep up", steady:"Steady", steadyS:"a good default", fast:"Faster", fastS:"more hunger",
+    activity:"Daily activity",
+    sit:"Mostly sitting", sitS:"desk job, little exercise",
+    light:"Lightly active", lightS:"walks, exercise 1–3× a week",
+    active:"Active", activeS:"on your feet, exercise 3–5× a week",
+    very:"Very active", veryS:"physical job or daily training",
+    r2Lose:"Eat about", r2Keep:"To stay where you are, eat about", r2Gain:"To gain steadily, eat about",
+    change:"Expected change", perWeek:"≈ {x} kg a week", noChange:"None",
+    reach:"Reach {g} kg", around:"around {d}", weeksN:"{n} weeks", weeksN_1:"1 week",
+    slow:"Very slow at this setting",
+    cut:"Daily cut", cutVal:"{x} kcal ≈ {n} sets of roti canai + teh tarik", cutVal_1:"{x} kcal ≈ {n} set of roti canai + teh tarik", cutOnly:"{x} kcal",
+    orLater:"or later", rangeNote:"The second date allows for your body burning a little less while you diet.",
+    periodHead:"Periods and the scale", periodTip:"Your target stays the same all month. Before and during your period, weight can rise 0.5–1 kg. That's water, not fat, and it drops again within a week. Feeling hungrier before your period is normal too. Compare weekly averages, or the same point in your cycle.",
+    actHint:"Not sure? Pick the lower one.", baking:"Baking your cake…", previewOpen:"View full picture", previewClose:"Show smaller",
+    floorNote:"We kept your target at {x} kcal so it doesn't drop too low. Moving more will speed things up.",
+    noRoomNote:"Your daily burn is already close to the minimum safe intake, so we didn't cut further. More activity is your best lever.",
+    clampNote:"That goal is below a healthy weight for your height. We used {x} kg instead.",
+    i2Lose:"The first week or two can drop faster (water), then it slows. No change after 4 weeks? Eat 100–200 kcal less or move more. Re-check your numbers every 4–5 kg.",
+    i2Keep:"Holding steady is a goal too. Weigh yourself a few times a week and watch the weekly average, not single days.",
+    i2Gain:"Gain slowly, keep protein high and do strength training, so more of the gain ends up as muscle, not fat.",
+    next2:"Next: macros", hint2:"2 taps",
+    s3Title:"Split it into macros", s3Sub:"Two taps. Protein comes first. Carbs and fat fill the rest.",
+    train:"Strength training",
+    rare:"Rarely", rareS:"or never", some:"1–2× a week", someS:"a little", lots:"3+ a week", lotsS:"regular lifting",
+    style:"Your plate leans to",
+    carbStyle:"Rice & bread", carbStyleS:"more carbs", bal:"Balanced", balS:"a bit of everything", fatStyle:"Meat, eggs & oil", fatStyleS:"fewer carbs",
+    r3Label:"Your plate for the day, by calories",
+    plateAria:"Plate split by calories: protein {p}%, fat {f}%, carbs {c}%",
+    mProtein:"Protein", mFat:"Fat", mCarb:"Carbs",
+    eqP:"≈ {n} palm-size portions of chicken, fish or tempeh across the day",
+    eqP_1:"≈ 1 palm-size portion of chicken, fish or tempeh across the day",
+    eqC:"≈ {n} cups of cooked rice (1 cup = 2 scoops), if it all came from rice",
+    eqC_1:"≈ 1 cup of cooked rice (2 scoops), if it all came from rice",
+    eqF:"≈ {n} tbsp of cooking oil in total, including what's already in your food",
+    eqF_1:"≈ 1 tbsp of cooking oil in total, including what's already in your food",
+    i3:"The carb and fat split matters much less than total calories. In a year-long trial, people on low-fat and low-carb diets lost about the same weight.",
+    next3:"Next: meals", hint3:"2 taps",
+    s4Title:"Turn it into meals", s4Sub:"Last layer. How you eat and how you sleep.",
+    meals:"Meals a day", m2S:"e.g. 16:8 fasting", m3S:"the usual", m4S:"with snacks",
+    sleep:"Sleep on most nights", sl1:"Under 6 h", sl2:"6–7 h", sl3:"7–8 h", sl4:"8 h or more",
+    r4Label:"Protein per meal",
+    palmsNote:"≈ {n} palm-size portions", palmsNote_1:"≈ 1 palm-size portion",
+    mealKcal:"Calories per meal", mealKcalVal:"≈ {x} kcal",
+    ifTip:"Eating in a window works by helping you eat less. Fit the same daily totals into your window.",
+    i4Short:"Short sleep while dieting costs muscle. In a small 2-week study, people on the same diet who slept 5.5 hours instead of 8.5 lost 55% less fat.",
+    i4Ok:"Good. Seven or more hours helps you keep muscle and keeps hunger in check while you diet.",
+    next4:"Get my kek lapis", hint4:"A one-of-a-kind cake and your targets",
+    s5Title:"Your kek lapis", s5Sub:"Baked just for you, and no one else's is the same. Change the pattern or colours as you like.",
+    chooseAria:"Change your cake", pattern:"Pattern", colours:"Colours", another:"Bake another",
+    patternList:"Choose a pattern", colourList:"Choose colours", cakeAlt:"Your kek lapis: {n} pattern, {c} colours.",
+    eachMeal:"Each meal · {n} a day",
+    palmN:"{n} palms of protein", palmN_1:"{n} palm of protein", palmSub:"protein · {g} g", riceN:"{n} cups of rice", riceN_1:"{n} cup of rice", riceSub:"carbs · {g} g",
+    oilN:"{n} tbsp of oil", oilSub:"fat · {g} g", perDay:"A day", goalRow:"Goal", goalBy:"{d} by {w}", goalKeep:"Keep my weight",
+    portionNote:"Rice and oil are rough guides, as if all your carbs came from rice and all your fat from oil.",
+    previewLabel:"The picture you'll save", previewSub:"Your cake and targets in one picture, ready for your gallery or social media.",
+    save:"Save image", saving:"Preparing image…",
+    savedOk:"Image saved.", downloaded:"Image downloaded.", sharedOk:"Done.",
+    longPress:"The save button doesn't work here. Long-press or right-click the image to save it.",
+    saveFail:"Couldn't create the image. Take a screenshot of the label below instead.",
+    cardAlt:"Kek lapis, {n}, {pal}. Daily targets: {k} kcal, protein {p} g, fat {f} g, carbs {c} g. Each meal: {m} g protein.",
+    restart:"Start over", confirmQ:"Clear all your numbers?", confirmYes:"Yes, clear", confirmNo:"Keep them",
+    back:"Back",
+    disclaimer:"Estimates for healthy adults, not medical advice. Pregnant, breastfeeding, under 18, or managing a health condition such as PCOS or diabetes? Check with a doctor or dietitian first. This calculator isn't designed for use during pregnancy.",
+    method:"Method: Mifflin-St Jeor equation × Malaysian RNI 2017 activity levels (1.4–2.0). Cuts of at most 750 kcal a day, as in Malaysia's 2023 obesity guidelines. Protein 1.2–2.0 g per kg. 7,700 kcal ≈ 1 kg of body weight. KKM portion sizes."
+  }
+};
+
+/*CALC-START*/
+/* Sources (checked October 2026):
+   Resting burn: Mifflin-St Jeor (1990). Activity levels: Malaysian RNI 2017 PAL 1.4 / 1.6 / 1.8 / 2.0 (same scale as FAO/WHO/UNU 2004).
+   Cuts: Malaysian CPG Management of Obesity 2023 - eat 500-750 kcal/day less for 0.5-1 kg a week; low-calorie diets
+   1,200-1,500 kcal (women) and 1,500-1,800 kcal (men), so the floors are the bottom of those ranges.
+   Protein: 1.2 g/kg (Leidy 2015, weight loss; RNI 2017 1.0-1.5), 1.6 (Morton 2018), 2.0 (ISSN 2017, top of 1.4-2.0).
+   Fat: 25 / 30 / 35% of energy (RNI 2017 25-30%, AMDR 20-35%). Carbs kept at 130 g or more where the day allows (IOM RDA).
+   Portions (KKM): 1 cawan nasi = 2 senduk = 150 g = 200 kcal (about 45 g carbs); 1 sudu teh minyak = 5 g; chicken or fish
+   portion 80-120 g (about 25 g protein). Roti canai + teh tarik = 420 kcal (KKM poster).
+   Goal date: early end = weekly simulation, 7,700 kcal per kg, burn recalculated from the new weight each week.
+   Late end adds the slowdown in Hall et al. (2011): the body burns less by about 14% of the calorie change. */
+var ACT = {sit:1.4, light:1.6, active:1.8, very:2.0};
+var LOSE = {gentle:0.10, steady:0.20, fast:0.25}, MAX_CUT = 750;
+var GAIN = {gentle:0.05, steady:0.10, fast:0.15}, MAX_ADD = 500;
+var PROT = {rare:1.2, some:1.6, lots:2.0};
+var FATS = {carb:0.25, bal:0.30, fat:0.35};
+var KCAL_PER_KG = 7700, ADAPT = 0.14, SET_KCAL = 420, PALM_G = 25, RICE_CUP_G = 45, OIL_TBSP_G = 15, MIN_CARB_G = 130;
+
+function bmrOf(sex, w, h, a){ return 10*w + 6.25*h - 5*a + (sex === 'm' ? 5 : -161); }
+function half(n){ return Math.round(n*2)/2; }
+function r5(n){ return Math.round(n/5)*5; }
+function r10(n){ return Math.round(n/10)*10; }
+
+function suggestGoal(s){
+  var h2 = Math.pow(s.height/100, 2);
+  var bmi = Math.round(s.weight/h2*10)/10;
+  if (bmi > 22.9) return Math.max(half(s.weight - 5), Math.ceil(22.9*h2*2)/2);
+  if (bmi < 18.5) return Math.ceil(18.5*h2*2)/2;
+  return s.weight;
+}
+
+function pctSplit(parts, tot){
+  if (tot <= 0) return [0,0,0];
+  var raw = parts.map(function(p){ return p/tot*100; });
+  var fl = raw.map(Math.floor);
+  var rest = 100 - fl.reduce(function(a,b){ return a+b; }, 0);
+  var order = raw.map(function(v,i){ return [v - fl[i], i]; }).sort(function(a,b){ return b[0]-a[0]; });
+  for (var k = 0; k < rest; k++) fl[order[k][1]]++;
+  return fl;
+}
+
+function plan(s){
+  var h2 = Math.pow(s.height/100, 2);
+  var act = ACT[s.act] || 1.4;
+  var bmr = bmrOf(s.sex, s.weight, s.height, s.age);
+  var tdee = bmr*act;
+  var bmi = Math.round(s.weight/h2*10)/10;
+  var cat = bmi < 18.5 ? 'under' : (bmi <= 22.9 ? 'healthy' : 'above');
+  var floor = s.sex === 'm' ? 1500 : 1200;
+  var minHealthy = Math.ceil(18.5*h2*2)/2;
+
+  var goal = (s.goal == null) ? suggestGoal(s) : s.goal;
+  var goalClamped = false;
+  if (goal < minHealthy && goal < s.weight){ goal = Math.min(minHealthy, s.weight); goalClamped = true; }
+  var mode = goal < s.weight - 0.25 ? 'lose' : (goal > s.weight + 0.25 ? 'gain' : 'keep');
+  if (cat === 'under' && goal <= s.weight){ mode = 'keep'; goal = s.weight; goalClamped = false; }
+
+  function intakeAt(w){
+    var t = bmrOf(s.sex, w, s.height, s.age)*act;
+    if (mode === 'lose'){
+      if (t <= floor) return {t:t, i:t, floorHit:false, noRoom:true};
+      var raw = t - Math.min(t*LOSE[s.pace], MAX_CUT);
+      if (raw < floor) return {t:t, i:floor, floorHit:true, noRoom:false};
+      return {t:t, i:raw, floorHit:false, noRoom:false};
+    }
+    if (mode === 'gain') return {t:t, i:t + Math.min(t*GAIN[s.pace], MAX_ADD), floorHit:false, noRoom:false};
+    return {t:t, i:t, floorHit:false, noRoom:false};
+  }
+
+  var now = intakeAt(s.weight);
+  var target = now.i;
+  var weekly = (target - tdee)*7/KCAL_PER_KG;
+
+  /* weeks to goal; adapt = the body burning a little less (or, when gaining, a little more) than its weight predicts */
+  function weeksTo(adapt){
+    var shift = adapt ? ADAPT*Math.abs(target - tdee) : 0, w = s.weight, n = 0;
+    while (n < 520){
+      var x = intakeAt(w), burn = mode === 'lose' ? x.t - shift : x.t + shift;
+      var dw = (x.i - burn)*7/KCAL_PER_KG;
+      if (mode === 'lose' ? dw > -0.02 : dw < 0.02) return null;
+      w += dw; n++;
+      if (mode === 'lose' ? w <= goal : w >= goal) return n;
+    }
+    return null;
+  }
+  var weeks = null, weeksLate = null, slow = false;
+  if (mode !== 'keep'){
+    weeks = weeksTo(false);
+    weeksLate = weeks == null ? null : weeksTo(true);
+    slow = weeks == null;
+  }
+
+  var steady = null;
+  if (tdee > floor) steady = Math.max(floor, tdee - Math.min(tdee*LOSE.steady, MAX_CUT));
+  var steadyGain = tdee + Math.min(tdee*GAIN.steady, MAX_ADD);
+
+  var ref = Math.min(mode === 'lose' ? goal : s.weight, 25*h2);
+  var gkg = PROT[s.train] || 1.2;
+  var protG = ref*gkg, protK = protG*4;
+  var fatK = target*(FATS[s.style] || 0.30);
+  var carbK = target - protK - fatK;
+  if (carbK < MIN_CARB_G*4){
+    var need = MIN_CARB_G*4 - carbK, room = Math.max(0, fatK - target*0.20), take = Math.min(need, room);
+    fatK -= take; carbK += take;
+  }
+  if (carbK < 0) carbK = 0;
+  var fatG = fatK/9, carbG = carbK/4;
+  var pcts = pctSplit([protK, fatK, carbK], protK + fatK + carbK);
+  var meals = s.meals || 3;
+  var cut = Math.max(0, tdee - target);
+
+  return {
+    bmr:bmr, tdee:tdee, bmi:bmi, cat:cat, floor:floor, minHealthy:minHealthy,
+    goal:goal, goalClamped:goalClamped, mode:mode, target:target,
+    floorHit:now.floorHit, noRoom:now.noRoom, cut:cut, weekly:weekly, weeks:weeks, weeksLate:weeksLate, slow:slow,
+    steady:steady, steadyGain:steadyGain, restPct:Math.round(bmr/tdee*100), ref:ref, gkg:gkg,
+    protG:protG, fatG:fatG, carbG:carbG, pP:pcts[0], pF:pcts[1], pC:pcts[2],
+    palms:half(protG/PALM_G), rice:half(carbG/RICE_CUP_G), oil:half(fatG/OIL_TBSP_G),
+    sets:half(cut/SET_KCAL),
+    meals:meals, mealProt:protG/meals, mealKcal:target/meals, mealPalms:half(protG/meals/PALM_G)
+  };
+}
+/*CALC-END*/
+
+/* ---------- State ---------- */
+var KEY = 'lapis-makro-v1';
+var DEF = {lang:'ms', theme:null, step:1, maxStep:1, sex:'m', age:32, height:170, weight:80, goal:null, goalAuto:true,
+           pace:'steady', act:'sit', train:'rare', style:'bal', meals:3, sleep:'78', example:true, cake:null};
+var RANGE = {age:[18,80,1], height:[140,210,1], weight:[35,250,0.5], goal:[35,250,0.5]};
+var ENUMS = {lang:['en','ms'], theme:['light','dark'], sex:['m','f'], pace:['gentle','steady','fast'], act:['sit','light','active','very'],
+             train:['rare','some','lots'], style:['carb','bal','fat'], sleep:['u6','67','78','8p']};
+
+function fresh(){ var s = {}; for (var k in DEF) s[k] = DEF[k]; return s; }
+function sanitize(o){
+  var s = fresh();
+  if (!o || typeof o !== 'object') return s;
+  Object.keys(ENUMS).forEach(function(k){ if (ENUMS[k].indexOf(o[k]) >= 0) s[k] = o[k]; });
+  ['age','height','weight'].forEach(function(k){ var v = +o[k]; if (isFinite(v) && v >= RANGE[k][0] && v <= RANGE[k][1]) s[k] = v; });
+  if (o.goal != null){ var g = +o.goal; if (isFinite(g) && g >= RANGE.goal[0] && g <= RANGE.goal[1]) s.goal = g; }
+  if (o.goalAuto === false) s.goalAuto = false;
+  if ([2,3,4].indexOf(+o.meals) >= 0) s.meals = +o.meals;
+  var ms = Math.floor(+o.maxStep); if (ms >= 1 && ms <= 5) s.maxStep = ms;
+  var st = Math.floor(+o.step); if (st >= 1 && st <= s.maxStep) s.step = st;
+  if (o.example === false) s.example = false;
+  if (typeof o.cake === 'string' && KekLapis.valid(o.cake)) s.cake = KekLapis.design(o.cake).code;
+  return s;
+}
+
+var S;
+(function load(){
+  var saved = null;
+  try { var raw = localStorage.getItem(KEY); if (raw) saved = JSON.parse(raw); } catch (e) { saved = null; }
+  S = sanitize(saved);
+})();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+/* ---------- Helpers ---------- */
+function $(id){ return document.getElementById(id); }
+function t(key, vars){
+  var d = T[S.lang] || T.ms;
+  var str = (key in d) ? d[key] : (key in T.ms ? T.ms[key] : key);
+  if (vars) str = str.replace(/\{(\w+)\}/g, function(m, k){ return (k in vars) ? vars[k] : m; });
+  return str;
+}
+var NF = new Intl.NumberFormat('en-MY');
+function fmt(n){ return NF.format(Math.round(n)); }
+function fmtH(n){ var v = Math.round(n*2)/2; return (v % 1 === 0) ? NF.format(v) : v.toFixed(1); }
+function fmt1(n){ var v = Math.round(n*10)/10; return (v % 1 === 0) ? String(v) : v.toFixed(1); }
+function tp(key, n, extra){
+  var d = T[S.lang] || T.ms;
+  var k = (n === 1 && (key + '_1') in d) ? key + '_1' : key;
+  var vars = {n: fmtH(n)};
+  if (extra) for (var e in extra) vars[e] = extra[e];
+  return t(k, vars);
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+var MON = {en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+           ms:['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis']};
+function reachDate(weeks){ var d = new Date(); d.setDate(d.getDate() + weeks*7); return d; }
+/* "Jan 2027", "Jan–Feb 2027", "Dis 2026 – Jan 2027", or "Jan 2027 atau lebih lewat" */
+function dateRange(a, b){
+  var e = reachDate(a);
+  if (b == null) return monthYear(e, S.lang) + ' ' + t('orLater');
+  var l = reachDate(b);
+  if (e.getFullYear() === l.getFullYear() && e.getMonth() === l.getMonth()) return monthYear(e, S.lang);
+  if (e.getFullYear() === l.getFullYear()) return MON[S.lang][e.getMonth()] + '–' + monthYear(l, S.lang);
+  return monthYear(e, S.lang) + ' – ' + monthYear(l, S.lang);
+}
+function weeksRange(a, b){
+  if (b == null) return t('weeksN', {n: a + '+'});
+  if (a === b) return (a === 1 && T[S.lang].weeksN_1) ? t('weeksN_1') : t('weeksN', {n: a});
+  return t('weeksN', {n: a + '–' + b});
+}
+function monthYear(d, lang){ return MON[lang][d.getMonth()] + ' ' + d.getFullYear(); }
+function signKg(v){ return (v < 0 ? '−' : '+') + Math.abs(v).toFixed(1); }
+var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+var mqDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+var mqPhone = window.matchMedia ? window.matchMedia('(max-width: 859px)') : null;
+function isPhone(){ return mqPhone ? mqPhone.matches : window.innerWidth < 860; }
+
+/* ---------- Theme ---------- */
+function effectiveTheme(){
+  var a = document.documentElement.getAttribute('data-theme');
+  if (a === 'dark' || a === 'light') return a;
+  return (mqDark && mqDark.matches) ? 'dark' : 'light';
+}
+function applyTheme(){
+  if (S.theme) document.documentElement.setAttribute('data-theme', S.theme);
+  var b = $('themeBtn'), eff = effectiveTheme();
+  b.setAttribute('data-mode', eff);
+  b.setAttribute('aria-label', t(eff === 'dark' ? 'toLight' : 'toDark'));
+  b.setAttribute('title', t(eff === 'dark' ? 'toLight' : 'toDark'));
+}
+if (mqDark){
+  var onScheme = function(){ if (!S.theme) applyTheme(); };
+  if (mqDark.addEventListener) mqDark.addEventListener('change', onScheme); else if (mqDark.addListener) mqDark.addListener(onScheme);
+}
+
+/* ---------- Static text and inputs ---------- */
+function applyStatic(){
+  document.documentElement.lang = S.lang === 'en' ? 'en' : 'ms';
+  var nodes = document.querySelectorAll('[data-t]');
+  for (var i = 0; i < nodes.length; i++){
+    var el = nodes[i], n = el.getAttribute('data-n');
+    el.textContent = t(el.getAttribute('data-t'), n ? {n:n} : null);
+  }
+  var ar = document.querySelectorAll('[data-t-aria]');
+  for (var j = 0; j < ar.length; j++) ar[j].setAttribute('aria-label', t(ar[j].getAttribute('data-t-aria')));
+  $('lang-en').setAttribute('aria-pressed', String(S.lang === 'en'));
+  $('lang-ms').setAttribute('aria-pressed', String(S.lang === 'ms'));
+  $('langGroup').setAttribute('aria-label', t('langLabel'));
+  applyTheme();
+}
+
+function goalValue(){ return S.goal == null ? suggestGoal(S) : S.goal; }
+function syncInputs(force){
+  ['age','height','weight','goal'].forEach(function(k){
+    var el = $(k);
+    if (!el || (!force && document.activeElement === el)) return;
+    var v = (k === 'goal') ? goalValue() : S[k];
+    el.value = (k === 'weight' || k === 'goal') ? fmt1(v) : String(v);
+  });
+  ['sex','pace','act','train','style','meals','sleep'].forEach(function(k){
+    var el = document.querySelector('input[name="' + k + '"][value="' + S[k] + '"]');
+    if (el) el.checked = true;
+  });
+}
+
+/* ---------- Layer stack and phone bar ---------- */
+function bandVal(n, P){
+  if (n === 1) return t('bandBurn', {x: fmt(r10(P.tdee))});
+  if (n === 2) return t('bandEat', {x: fmt(r10(P.target))});
+  if (n === 3) return t('bandMacro', {p: fmt(r5(P.protG)), f: fmt(r5(P.fatG)), c: fmt(r5(P.carbG))});
+  return t('bandMeal', {x: fmt(P.mealProt)});
+}
+function renderStack(P){
+  var segs = document.querySelectorAll('.psegs i');
+  for (var n = 1; n <= 4; n++){
+    var b = $('band-' + n), open = n <= S.maxStep;
+    b.disabled = !open;
+    b.classList.toggle('on', open);
+    if (S.step === n) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    b.innerHTML = '<span class="bn">' + n + '</span><span class="bname">' + esc(t('n' + n)) + '</span><span class="bval">' + esc(open ? bandVal(n, P) : t('lock' + n)) + '</span>';
+    segs[n-1].classList.toggle('on', open);
+    segs[n-1].classList.toggle('cur', S.step === n);
+  }
+  var tl = $('toLabel');
+  tl.hidden = S.maxStep < 5;
+  if (S.step === 5) tl.setAttribute('aria-current', 'page'); else tl.removeAttribute('aria-current');
+  var sTxt = S.step <= 4 ? t('stepShort', {n: S.step}) : t('doneShort');
+  var name = t('n' + S.step);
+  $('pStep').innerHTML = S.step <= 4 ? '<span class="pw">' + esc(t('stepWord')) + ' </span>' + S.step + '/4' : esc(sTxt);
+  $('pName').textContent = name;
+  $('pbarBtn').setAttribute('aria-label', t('pbarAria', {s: sTxt, name: name}));
+}
+function setPanel(open){
+  $('progress').classList.toggle('open', open);
+  $('pbarBtn').setAttribute('aria-expanded', String(open));
+}
+
+/* ---------- Rewards ---------- */
+function row(k, v){ return '<div><dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd></div>'; }
+function insight(txt){ return '<div class="insight"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true"><use href="#m-smile"/></svg><p class="i-label">' + esc(t('goodToKnow')) + '</p><p>' + esc(txt) + '</p></div>'; }
+function alertBox(txt){ return '<p class="alert">' + esc(txt) + '</p>'; }
+function bigNum(key, val, unit){
+  return '<p class="big"><span class="cnt" data-key="' + key + '" data-to="' + Math.round(val) + '">' + fmt(val) + '</span> <span class="u">' + esc(unit) + '</span></p>';
+}
+
+function reward1(P){
+  var h = '<p class="r-label">' + esc(t('r1Label')) + '</p>';
+  h += bigNum('burn', r10(P.tdee), t('kcalDay'));
+  h += '<p class="note">' + esc(S.maxStep >= 2 ? t('basedOn', {a: t(S.act)}) : t('assume')) + '</p>';
+  h += '<dl class="rows">';
+  if (P.cat === 'above' && P.steady != null) h += row(t('steadyLose'), t('perDay', {x: fmt(r10(P.steady))}));
+  if (P.cat === 'under') h += row(t('steadyGain'), t('perDay', {x: fmt(r10(P.steadyGain))}));
+  h += row(t('protein'), t('protVal', {g: fmt(r5(P.protG))}));
+  h += row(t('bmi'), t('bmiVal', {b: P.bmi.toFixed(1), cat: t('cat_' + P.cat)}));
+  h += '</dl>';
+  if (P.cat === 'under') h += alertBox(t('underNote'));
+  h += insight(t('i1', {p: P.restPct}));
+  h += '<p class="fine">' + esc(t('bmiNote')) + '</p>';
+  return h;
+}
+
+function reward2(P){
+  var lbl = P.mode === 'lose' ? 'r2Lose' : (P.mode === 'gain' ? 'r2Gain' : 'r2Keep');
+  var h = '<p class="r-label">' + esc(t(lbl)) + '</p>';
+  h += bigNum('target', r10(P.target), t('kcalDay'));
+  h += '<dl class="rows">';
+  if (P.mode === 'keep' || Math.abs(P.weekly) < 0.05) h += row(t('change'), t('noChange'));
+  else h += row(t('change'), t('perWeek', {x: signKg(P.weekly)}));
+  if (P.mode !== 'keep'){
+    if (P.weeks != null){
+      h += row(t('reach', {g: fmt1(P.goal)}), t('around', {d: dateRange(P.weeks, P.weeksLate)}) + ' · ' + weeksRange(P.weeks, P.weeksLate));
+    } else {
+      h += row(t('reach', {g: fmt1(P.goal)}), t('slow'));
+    }
+  }
+  if (P.mode === 'lose' && P.cut >= 5){
+    var cutTxt = P.sets >= 0.5 ? t((P.sets <= 1 && T[S.lang].cutVal_1) ? 'cutVal_1' : 'cutVal', {x: fmt(r10(P.cut)), n: halfTxt(P.sets)}) : t('cutOnly', {x: fmt(r10(P.cut))});
+    h += row(t('cut'), cutTxt);
+  }
+  h += '</dl>';
+  if (P.goalClamped) h += alertBox(t('clampNote', {x: fmt1(P.goal)}));
+  if (P.cat === 'under' && S.goal != null && S.goal < S.weight) h += alertBox(t('underKeep'));
+  if (P.floorHit) h += alertBox(t('floorNote', {x: fmt(P.floor)}));
+  if (P.noRoom) h += alertBox(t('noRoomNote'));
+  if (P.weeks != null && P.weeksLate !== P.weeks) h += '<p class="fine">' + esc(t('rangeNote')) + '</p>';
+  if (S.sex === 'f') h += '<p class="tip"><b>' + esc(t('periodHead')) + '.</b> ' + esc(t('periodTip')) + '</p>';
+  h += insight(t(P.mode === 'lose' ? 'i2Lose' : (P.mode === 'gain' ? 'i2Gain' : 'i2Keep')));
+  return h;
+}
+
+/* Plate: a pie on a plate, protein, fat and carbs by share of calories */
+var PL = {cx:160, cy:120, rim:112, well:94, label:58};
+function plateSVG(P){
+  return '<svg class="plate" viewBox="0 0 320 240" role="img" aria-label="' + esc(t('plateAria', {p: P.pP, f: P.pF, c: P.pC})) + '">' +
+    '<g class="utensil" aria-hidden="true">' +
+      '<rect x="10" y="34" width="4" height="40" rx="2"/><rect x="17" y="34" width="4" height="40" rx="2"/><rect x="24" y="34" width="4" height="40" rx="2"/><rect x="31" y="34" width="4" height="40" rx="2"/>' +
+      '<path d="M10 70h25v6c0 7-4 12-8 14v0h-9c-4-2-8-7-8-14z"/>' +
+      '<rect x="18.5" y="86" width="8" height="122" rx="4"/>' +
+      '<ellipse cx="300" cy="62" rx="13" ry="24"/>' +
+      '<rect x="296" y="80" width="8" height="128" rx="4"/>' +
+    '</g>' +
+    '<circle class="pl-rim" cx="' + PL.cx + '" cy="' + PL.cy + '" r="' + PL.rim + '"/>' +
+    '<circle class="pl-well" cx="' + PL.cx + '" cy="' + PL.cy + '" r="' + PL.well + '"/>' +
+    '<path class="w w-p" d=""/><path class="w w-f" d=""/><path class="w w-c" d=""/>' +
+    '<text class="wl wl-p"></text><text class="wl wl-f"></text><text class="wl wl-c"></text>' +
+    '</svg>';
+}
+function wedgePath(a0, a1){
+  var cx = PL.cx, cy = PL.cy, r = PL.well;
+  if (a1 - a0 <= 0.0001) return '';
+  if (a1 - a0 >= Math.PI*2 - 0.0001){
+    return 'M' + cx + ' ' + (cy - r) + ' A' + r + ' ' + r + ' 0 1 1 ' + cx + ' ' + (cy + r) + ' A' + r + ' ' + r + ' 0 1 1 ' + cx + ' ' + (cy - r) + ' Z';
+  }
+  var x0 = cx + r*Math.sin(a0), y0 = cy - r*Math.cos(a0), x1 = cx + r*Math.sin(a1), y1 = cy - r*Math.cos(a1);
+  return 'M' + cx + ' ' + cy + ' L' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > Math.PI ? 1 : 0) + ' 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' Z';
+}
+function drawPlate(svg, shares){
+  var ws = svg.querySelectorAll('.w'), ls = svg.querySelectorAll('.wl'), a = 0;
+  for (var i = 0; i < 3; i++){
+    var span = Math.max(0, shares[i])/100*Math.PI*2;
+    ws[i].setAttribute('d', wedgePath(a, a + span));
+    var mid = a + span/2;
+    if (shares[i] >= 9){
+      ls[i].setAttribute('x', (PL.cx + PL.label*Math.sin(mid)).toFixed(1));
+      ls[i].setAttribute('y', (PL.cy - PL.label*Math.cos(mid)).toFixed(1));
+      ls[i].textContent = Math.round(shares[i]) + '%';
+    } else {
+      ls[i].textContent = '';
+    }
+    a += span;
+  }
+}
+var plateFrom = [0,0,0], plateRaf = 0;
+function animatePlate(svg, to){
+  var from = plateFrom.slice();
+  plateFrom = to.slice();
+  if (plateRaf) cancelAnimationFrame(plateRaf);
+  if (reduceMotion || (from[0] === to[0] && from[1] === to[1] && from[2] === to[2])){ drawPlate(svg, to); return; }
+  var start = performance.now(), dur = 700;
+  drawPlate(svg, from);
+  function tick(now){
+    var k = Math.min(1, (now - start)/dur), e = 1 - Math.pow(1 - k, 3);
+    drawPlate(svg, from.map(function(v, i){ return v + (to[i] - v)*e; }));
+    if (k < 1) plateRaf = requestAnimationFrame(tick); else plateRaf = 0;
+  }
+  plateRaf = requestAnimationFrame(tick);
+}
+
+function mrow(k, name, g, pct){
+  return '<div class="mrow"><dt><span class="dot d-' + k + '" aria-hidden="true"></span>' + esc(name) + '</dt><dd><b>' + fmt(g) + ' g</b><span class="pct">' + pct + '%</span></dd></div>';
+}
+function reward3(P){
+  var h = '<p class="r-label">' + esc(t('r3Label')) + '</p>';
+  h += '<div class="plate-block">' + plateSVG(P);
+  h += '<dl class="mrows">' + mrow('p', t('mProtein'), r5(P.protG), P.pP) + mrow('f', t('mFat'), r5(P.fatG), P.pF) + mrow('c', t('mCarb'), r5(P.carbG), P.pC) + '</dl>';
+  h += '</div>';
+  h += '<ul class="eq">' +
+       '<li><span class="dot d-p" aria-hidden="true"></span><span>' + esc(tp('eqP', P.palms)) + '</span></li>' +
+       '<li><span class="dot d-f" aria-hidden="true"></span><span>' + esc(tp('eqF', P.oil)) + '</span></li>' +
+       '<li><span class="dot d-c" aria-hidden="true"></span><span>' + esc(tp('eqC', P.rice)) + '</span></li></ul>';
+  h += insight(t('i3'));
+  return h;
+}
+
+function reward4(P){
+  var h = '<p class="r-label">' + esc(t('r4Label')) + '</p>';
+  h += bigNum('meal', Math.round(P.mealProt), 'g');
+  h += '<p class="note">' + esc(tp('palmsNote', P.mealPalms)) + '</p>';
+  h += '<dl class="rows">' + row(t('mealKcal'), t('mealKcalVal', {x: fmt(r10(P.mealKcal))})) + row(t('meals'), String(P.meals)) + '</dl>';
+  if (S.meals === 2) h += '<p class="tip">' + esc(t('ifTip')) + '</p>';
+  h += insight(t(S.sleep === 'u6' || S.sleep === '67' ? 'i4Short' : 'i4Ok'));
+  return h;
+}
+
+/* HTML label, used only when the image cannot be drawn */
+function renderLabel(P){
+  var h = '<div class="np" role="group" aria-label="Sasaran harian / Daily targets">';
+  h += '<p class="np-head">Sasaran harian<span>Daily targets</span></p>';
+  h += '<div class="np-rule thick"></div>';
+  h += '<div class="np-energy"><span>Tenaga / Energy</span><b>' + fmt(r10(P.target)) + ' kcal</b></div>';
+  h += '<div class="np-rule"></div>';
+  h += '<div class="np-row"><span>Protein</span><b>' + fmt(r5(P.protG)) + ' g</b></div>';
+  h += '<div class="np-row"><span>Lemak / Fat</span><b>' + fmt(r5(P.fatG)) + ' g</b></div>';
+  h += '<div class="np-row"><span>Karbohidrat / Carbohydrate</span><b>' + fmt(r5(P.carbG)) + ' g</b></div>';
+  h += '<div class="np-rule thick"></div>';
+  h += '<div class="np-row"><span>Protein sehidang / per meal</span><b>' + fmt(P.mealProt) + ' g × ' + P.meals + '</b></div>';
+  h += '</div>';
+  $('labelPanel').innerHTML = h;
+}
+
+/* ---------- Saved picture: 1080 × 1350, the person's cake with their portions (drawn by KekCard) ---------- */
+var CARD_W = 1080, CARD_H = 1350;
+function cardFile(){ return 'kek-lapis-' + (S.cake || 'lapis-makro') + '.png'; }
+function fontsReady(){
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  var specs = ['900 120px "Libre Franklin"', '800 40px "Libre Franklin"', '700 30px "Atkinson Hyperlegible"', '400 26px "Atkinson Hyperlegible"'];
+  var all = Promise.all(specs.map(function(s){ return document.fonts.load(s).catch(function(){}); }));
+  return Promise.race([all, new Promise(function(r){ setTimeout(r, 2500); })]);
+}
+function siteLabel(){
+  try {
+    if (window.claude) return '';
+    if (!/^https?:$/.test(location.protocol)) return '';
+    var p = location.pathname.replace(/index\.html?$/, '');
+    return (location.host + p).replace(/\/$/, '');
+  } catch (e) { return ''; }
+}
+function halfTxt(v){ var n = Math.max(0.5, Math.round(v*2)/2), w = Math.floor(n); return (w ? String(w) : '') + (n > w ? '½' : ''); }
+function goalParts(P){
+  if (P.mode === 'keep') return {delta:'', when:''};
+  return {delta: (P.mode === 'lose' ? '−' : '+') + fmt1(Math.abs(S.weight - P.goal)) + ' kg', when: P.weeks != null ? dateRange(P.weeks, P.weeksLate) : ''};
+}
+function cardData(P){
+  var g = goalParts(P), m = P.meals;
+  return {lang: S.lang, kcalText: fmt(r10(P.target)), p: fmt(r5(P.protG)), f: fmt(r5(P.fatG)), c: fmt(r5(P.carbG)),
+          pp: P.pP, pf: P.pF, pc: P.pC, meals: m, mealP: fmt(P.protG/m), mealC: fmt(P.carbG/m), mealF: fmt(P.fatG/m),
+          palms: P.protG/m/PALM_G, rice: P.carbG/m/RICE_CUP_G, oil: P.fatG/m/OIL_TBSP_G, mealKcal: fmt(r10(P.mealKcal)),
+          goalDelta: g.delta, goalWhen: g.when, mode: P.mode, site: siteLabel()};
+}
+var cardBlob = null, cardURL = '', cardToken = 0, cardTimer = 0;
+function makeCard(){
+  var P = plan(S), token = ++cardToken, code = S.cake;
+  cardBlob = null;
+  return fontsReady().then(function(){
+    if (token !== cardToken) return;
+    var cv = document.createElement('canvas');
+    cv.width = CARD_W; cv.height = CARD_H;
+    try { KekCard.draw(cv, cardData(P), code); } catch (e) { return cardFailed(P); }
+    if (!cv.toBlob) return cardFailed(P);
+    return new Promise(function(res){
+      cv.toBlob(function(b){
+        if (token !== cardToken) return res();
+        if (!b){ cardFailed(P); return res(); }
+        cardBlob = b;
+        if (cardURL) try { URL.revokeObjectURL(cardURL); } catch (e) {}
+        cardURL = URL.createObjectURL(b);
+        var d = KekLapis.design(code), info = KekLapis.describe(d, S.lang), img = $('cardImg');
+        img.src = cardURL;
+        img.alt = t('cardAlt', {n: info.name, pal: info.palette, k: fmt(r10(P.target)), p: fmt(r5(P.protG)), f: fmt(r5(P.fatG)), c: fmt(r5(P.carbG)), m: fmt(P.mealProt)});
+        $('cardPreview').hidden = false; $('labelPanel').hidden = true;
+        res();
+      }, 'image/png');
+    });
+  });
+}
+function queueCard(){ clearTimeout(cardTimer); cardBlob = null; cardTimer = setTimeout(makeCard, 300); }
+function cardFailed(P){
+  $('cardPreview').hidden = true;
+  renderLabel(P); $('labelPanel').hidden = false;
+  setStatus(t('saveFail'), true);
+}
+function setStatus(msg, warn){
+  var s = $('saveStatus'); s.textContent = msg || ''; s.classList.toggle('warn', !!warn);
+  if (msg && msg === t('longPress')){ setPreview(true); try { $('cardPreview').scrollIntoView({block: 'center', behavior: reduceMotion ? 'auto' : 'smooth'}); } catch (e) {} }
+}
+function setPreview(open){
+  $('cardPreview').classList.toggle('open', open);
+  $('pvBtn').setAttribute('aria-expanded', String(open));
+  $('pvBtn').textContent = t(open ? 'previewClose' : 'previewOpen');
+}
+
+/* ---------- The cake and the portions on the final page ---------- */
+var ICON = {
+  p: '<svg class="i-p" viewBox="0 0 56 56" aria-hidden="true"><g fill="currentColor"><rect x="13" y="9" width="6.6" height="30" rx="3.3"/><rect x="20.5" y="4" width="6.6" height="30" rx="3.3"/><rect x="28" y="4" width="6.6" height="30" rx="3.3"/><rect x="35.5" y="9" width="6.6" height="30" rx="3.3"/><rect x="12" y="24" width="31" height="28" rx="10"/><rect x="-3.6" y="-21" width="7.2" height="22" rx="3.6" transform="translate(14 40) rotate(-48.7)"/></g></svg>',
+  c: '<svg class="i-c" viewBox="0 0 56 56" aria-hidden="true"><path d="M9 30A19 19 0 0 1 47 30Z" fill="var(--plate)" stroke="currentColor" stroke-width="3"/><g fill="currentColor"><ellipse cx="21" cy="20" rx="2.6" ry="1.5" transform="rotate(29 21 20)"/><ellipse cx="29" cy="15" rx="2.6" ry="1.5" transform="rotate(29 29 15)"/><ellipse cx="36" cy="21" rx="2.6" ry="1.5" transform="rotate(29 36 21)"/><ellipse cx="26" cy="26" rx="2.6" ry="1.5" transform="rotate(29 26 26)"/><path d="M4 29h48q-2 20-24 21q-22-1-24-21z"/><rect x="19" y="49" width="18" height="5" rx="2.5"/></g></svg>',
+  f: '<svg class="i-f" viewBox="0 0 56 56" aria-hidden="true"><ellipse rx="11" ry="15" transform="translate(19 20) rotate(-44.7)" fill="currentColor"/><path d="M27 29L50 52" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><ellipse rx="5" ry="7.5" transform="translate(17 18) rotate(-44.7)" fill="#FFFFFF" opacity=".55"/></svg>'
+};
+function portionTxt(key, v){
+  var d = T[S.lang] || T.ms, n = Math.max(0.5, Math.round(v*2)/2);
+  return t((n <= 1 && (key + '_1') in d) ? key + '_1' : key, {n: halfTxt(v)});
+}
+function pItem(k, big, small){ return '<li>' + ICON[k] + '<div><b>' + esc(big) + '</b><small>' + esc(small) + '</small></div></li>'; }
+function reward5(P){
+  var m = P.meals, g = goalParts(P);
+  var h = '<p class="r-label">' + esc(t('eachMeal', {n: m})) + '</p><ul class="portions">';
+  h += pItem('p', portionTxt('palmN', P.protG/m/PALM_G), t('palmSub', {g: fmt(P.protG/m)}));
+  h += pItem('c', portionTxt('riceN', P.carbG/m/RICE_CUP_G), t('riceSub', {g: fmt(P.carbG/m)}));
+  h += pItem('f', portionTxt('oilN', P.fatG/m/OIL_TBSP_G), t('oilSub', {g: fmt(P.fatG/m)}));
+  h += '</ul><dl class="rows">' + row(t('mealKcal'), t('mealKcalVal', {x: fmt(r10(P.mealKcal))})) + '</dl>';
+  h += '<div class="day"><p class="day-h"><span>' + esc(t('perDay')) + '</span><b>' + fmt(r10(P.target)) + ' kcal</b></p>';
+  h += '<div class="mbar" aria-hidden="true"><i class="d-p" style="flex-grow:' + P.pP + '"></i><i class="d-f" style="flex-grow:' + P.pF + '"></i><i class="d-c" style="flex-grow:' + P.pC + '"></i></div>';
+  h += '<ul class="mleg"><li><span class="dot d-p" aria-hidden="true"></span>' + esc(t('mProtein')) + ' <b>' + fmt(r5(P.protG)) + ' g</b></li>' +
+       '<li><span class="dot d-f" aria-hidden="true"></span>' + esc(t('mFat')) + ' <b>' + fmt(r5(P.fatG)) + ' g</b></li>' +
+       '<li><span class="dot d-c" aria-hidden="true"></span>' + esc(t('mCarb')) + ' <b>' + fmt(r5(P.carbG)) + ' g</b></li></ul></div>';
+  h += '<dl class="rows">' + row(t('goalRow'), P.mode === 'keep' ? t('goalKeep') : (g.when ? t('goalBy', {d: g.delta, w: g.when}) : g.delta)) + '</dl>';
+  h += '<p class="fine">' + esc(t('portionNote')) + '</p>';
+  return h;
+}
+var baking = false;
+function drawCakeOn(cv, d){
+  var dpr = Math.min(3, window.devicePixelRatio || 1), size = Math.round((cv.clientWidth || 300)*dpr);
+  if (cv.width !== size){ cv.width = size; cv.height = size; }
+  var x = cv.getContext('2d');
+  x.clearRect(0, 0, size, size);
+  KekLapis.drawSlice(x, 0, 0, size, d);
+}
+function playOnce(el, cls, ms){
+  if (reduceMotion) return;
+  el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+  clearTimeout(el['_' + cls]);
+  el['_' + cls] = setTimeout(function(){ el.classList.remove(cls); }, ms);
+}
+/* mode: 'reveal' (first cut), 'swap' (new cake slices in over the old one) or nothing */
+function renderCake(mode){
+  if (!S.cake || baking) return;
+  var d = KekLapis.design(S.cake), info = KekLapis.describe(d, S.lang), front = $('cakeCanvas'), back = $('cakeBack');
+  if (mode === 'swap' && !reduceMotion){
+    if (back.width !== front.width){ back.width = front.width; back.height = front.height; }
+    var bx = back.getContext('2d'); bx.clearRect(0, 0, back.width, back.height); bx.drawImage(front, 0, 0);
+  }
+  drawCakeOn(front, d);
+  if (mode) playOnce($('slice'), mode, mode === 'reveal' ? 820 : 520);
+  front.setAttribute('aria-label', t('cakeAlt', {n: info.name, c: info.palette}));
+  $('cakeName').textContent = info.name + ' · ' + info.palette;
+  $('cakeCode').textContent = '#' + d.code;
+  if (openStrip) markStrip();
+}
+/* The first time someone reaches the last page, their cake is baked layer by layer, then cut open */
+function bakeCake(){
+  if (reduceMotion){ renderCake(); return; }
+  var d = KekLapis.design(S.cake), cols = d.cols, stack = $('ovenStack'), html = '';
+  for (var i = 0; i < 9; i++) html += '<i style="background:' + (i % 2 ? '#F2D49B' : cols[(i >> 1) % cols.length]) + ';animation-delay:' + (i*95) + 'ms"></i>';
+  stack.innerHTML = html;
+  baking = true;
+  $('slice').style.visibility = 'hidden'; $('cheer').classList.add('hide');
+  $('oven').hidden = false; $('oven').classList.add('run');
+  $('cakeName').textContent = t('baking'); $('cakeCode').textContent = '';
+  setTimeout(function(){
+    baking = false;
+    $('oven').hidden = true; $('oven').classList.remove('run');
+    $('slice').style.visibility = '';
+    renderCake('reveal');
+    var ch = $('cheer'); ch.classList.remove('hide');
+    playOnce(ch, 'in', 500);
+    setTimeout(function(){ playOnce(ch, 'hop', 1100); }, 520);
+    $('live').textContent = $('cakeName').textContent;
+  }, 1250);
+}
+var openStrip = null;
+function toggleStrip(kind){
+  openStrip = (openStrip === kind) ? null : kind;
+  $('pickPattern').setAttribute('aria-expanded', String(openStrip === 'pattern'));
+  $('pickColour').setAttribute('aria-expanded', String(openStrip === 'colour'));
+  $('chooser').hidden = !openStrip;
+  if (openStrip) renderStrip();
+}
+function renderStrip(){
+  var kind = openStrip, list = kind === 'pattern' ? KekLapis.PATTERNS : KekLapis.PALETTES, strip = $('strip');
+  var px = Math.round(68*Math.min(2, window.devicePixelRatio || 1));
+  strip.setAttribute('aria-label', t(kind === 'pattern' ? 'patternList' : 'colourList'));
+  strip.innerHTML = list.map(function(it, i){
+    return '<button type="button" class="opt" aria-pressed="false" data-kind="' + kind + '" data-i="' + i + '"><canvas width="' + px + '" height="' + px + '" aria-hidden="true"></canvas><span>' + esc(it[S.lang] || it.ms) + '</span></button>';
+  }).join('');
+  Array.prototype.forEach.call(strip.querySelectorAll('canvas'), function(cv, i){
+    var code = kind === 'pattern' ? KekLapis.withPattern(S.cake, i) : KekLapis.withPalette(S.cake, i);
+    KekLapis.drawSlice(cv.getContext('2d'), 0, 0, px, KekLapis.design(code));
+  });
+  markStrip();
+}
+function markStrip(){
+  var cur = KekLapis.parts(S.cake), sel = openStrip === 'pattern' ? cur.pattern : cur.palette;
+  Array.prototype.forEach.call($('strip').querySelectorAll('.opt'), function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-i') === sel)); });
+}
+function setCake(code, redrawStrip){
+  S.cake = code; save();
+  renderCake('swap');
+  if (redrawStrip && openStrip) renderStrip();
+  if (redrawStrip) playOnce($('cheer'), 'hop', 1100);
+  $('live').textContent = $('cakeName').textContent;
+  queueCard();
+}
+
+/* Saving: Claude viewer capability, then the phone share sheet, then a normal download, then long-press */
+var downloadsNS = null;
+var inViewer = !!(window.claude && typeof window.claude.use === 'function');
+if (inViewer){
+  try { window.claude.use('downloads').then(function(ns){ downloadsNS = ns; }, function(){ downloadsNS = null; }); } catch (e) {}
+}
+function doSave(btn){
+  if (!cardBlob){ setStatus(t('saving')); makeCard().then(function(){ if (cardBlob) doSave(btn); }); return; }
+  setStatus('');
+  if (downloadsNS){
+    downloadsNS.save({filename: cardFile(), data: cardBlob}).then(function(){ setStatus(t('savedOk')); }, function(err){
+      var code = err && err.code;
+      if (code === 'declined') return;
+      if (code === 'rate_limited') return;
+      setStatus(t('longPress'), true);
+    });
+    return;
+  }
+  if (inViewer){ setStatus(t('longPress'), true); return; }
+  var file = null;
+  try { file = new File([cardBlob], cardFile(), {type: 'image/png'}); } catch (e) { file = null; }
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  if (file && coarse && navigator.canShare && navigator.share){
+    var ok = false;
+    try { ok = navigator.canShare({files: [file]}); } catch (e) { ok = false; }
+    if (ok){
+      navigator.share({files: [file], title: 'Lapis Makro'}).then(function(){ setStatus(t('sharedOk')); }, function(err){
+        if (err && err.name === 'AbortError') return;
+        downloadFile();
+      });
+      return;
+    }
+  }
+  downloadFile();
+}
+function downloadFile(){
+  try {
+    var a = document.createElement('a');
+    a.href = cardURL; a.download = cardFile(); a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+    setStatus(t('downloaded'));
+  } catch (e) { setStatus(t('longPress'), true); }
+}
+
+/* ---------- Count-up for the big numbers ---------- */
+var lastVal = {}, rafs = {};
+function runCounters(root){
+  var els = root.querySelectorAll('.cnt');
+  Array.prototype.forEach.call(els, function(el){
+    var key = el.getAttribute('data-key'), to = +el.getAttribute('data-to'), from = lastVal[key];
+    lastVal[key] = to;
+    if (reduceMotion || from == null || from === to){ el.textContent = fmt(to); return; }
+    if (rafs[key]) cancelAnimationFrame(rafs[key]);
+    var start = performance.now(), dur = 380;
+    el.textContent = fmt(from);
+    function tick(now){
+      var k = Math.min(1, (now - start)/dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt(from + (to - from)*e);
+      if (k < 1) rafs[key] = requestAnimationFrame(tick);
+    }
+    rafs[key] = requestAnimationFrame(tick);
+  });
+}
+
+/* ---------- Render ---------- */
+var announceTimer = null;
+function update(){
+  save();
+  var P = plan(S);
+  renderStack(P);
+  var fns = [null, reward1, reward2, reward3, reward4, reward5];
+  var r = $('r' + S.step);
+  if (r && fns[S.step]){
+    r.innerHTML = fns[S.step](P);
+    runCounters(r);
+    var svg = r.querySelector('.plate');
+    if (svg) animatePlate(svg, [P.pP, P.pF, P.pC]);
+  }
+  if (S.step === 5){ renderCake(); queueCard(); }
+  $('pvBtn').textContent = t($('cardPreview').classList.contains('open') ? 'previewClose' : 'previewOpen');
+  $('exampleBadge').hidden = !S.example;
+  $('goalHint').hidden = !S.goalAuto;
+  clearTimeout(announceTimer);
+  announceTimer = setTimeout(function(){
+    if (!r) return;
+    var lab = r.querySelector('.r-label'), big = r.querySelector('.big');
+    if (lab && big) $('live').textContent = lab.textContent + ' ' + big.textContent;
+  }, 900);
+}
+
+function go(n, viaNext){
+  if (n < 1 || n > 5) return;
+  if (n > S.maxStep && !(viaNext && n === S.maxStep + 1)) return;
+  var isNew = n > S.maxStep, from = S.step;
+  if (n >= 2 && S.goal == null){ S.goal = suggestGoal(S); S.goalAuto = true; }
+  var firstCake = (n === 5 && !S.cake);
+  if (firstCake) S.cake = KekLapis.newCode();
+  S.maxStep = Math.max(S.maxStep, n);
+  S.step = n;
+  setPanel(false);
+  for (var i = 1; i <= 5; i++) $('s' + i).hidden = (i !== n);
+  $('confirmRow').hidden = true;
+  setStatus('');
+  if (n !== 3) plateFrom = [0,0,0];
+  syncInputs(true);
+  update();
+  if (isNew && n <= 4){
+    var b = $('band-' + n), seg = document.querySelectorAll('.psegs i')[n-1];
+    [b, seg].forEach(function(el){ playOnce(el, 'fresh', 700); });
+  }
+  if (isNew && n === 5) playOnce($('toLabel'), 'fresh', 700);
+  if (from !== n){
+    var secEl = $('s' + n);
+    secEl.classList.toggle('rev', n < from);
+    playOnce(secEl, 'enter', 560);
+  }
+  if (firstCake) bakeCake();
+  var sec = $('s' + n);
+  var offset = isPhone() ? $('progress').offsetHeight + 12 : 16;
+  var y = sec.getBoundingClientRect().top + window.pageYOffset - offset;
+  try { window.scrollTo({top: Math.max(0, y), behavior: reduceMotion ? 'auto' : 'smooth'}); } catch (e) { window.scrollTo(0, Math.max(0, y)); }
+  var h = $('s' + n + '-h');
+  if (h) try { h.focus({preventScroll: true}); } catch (e) { h.focus(); }
+}
+
+/* ---------- Inputs ---------- */
+function showErr(k, msg){ var e = $(k + '-err'); e.textContent = msg; e.hidden = false; }
+function setVal(k, v){
+  S[k] = v; S.example = false;
+  if (k === 'goal') S.goalAuto = false;
+  else if (S.goalAuto && S.goal != null && (k === 'weight' || k === 'height')){ S.goal = suggestGoal(S); syncInputs(); }
+  update();
+}
+function onNum(el){
+  var k = el.id, R = RANGE[k];
+  var raw = String(el.value).trim().replace(',', '.');
+  var v = parseFloat(raw);
+  if (raw === '' || !isFinite(v)) return showErr(k, t('errRange', {min: R[0], max: R[1]}));
+  if (k === 'age' && v < 18) return showErr(k, t('errAdult'));
+  if (v < R[0] || v > R[1]) return showErr(k, t('errRange', {min: R[0], max: R[1]}));
+  $(k + '-err').hidden = true;
+  v = (k === 'age' || k === 'height') ? Math.round(v) : Math.round(v*10)/10;
+  setVal(k, v);
+}
+function stepBtn(btn){
+  var k = btn.getAttribute('data-field'), dir = +btn.getAttribute('data-dir'), R = RANGE[k];
+  var cur = (k === 'goal') ? goalValue() : S[k];
+  var v = Math.min(R[1], Math.max(R[0], Math.round((cur + dir*R[2])*10)/10));
+  $(k).value = (k === 'weight' || k === 'goal') ? fmt1(v) : String(v);
+  $(k + '-err').hidden = true;
+  playOnce($(k), 'bump', 360);
+  setVal(k, v);
+}
+
+document.addEventListener('input', function(e){
+  if (e.target.matches && e.target.matches('.mid input')) onNum(e.target);
+});
+document.addEventListener('focusout', function(e){
+  var el = e.target;
+  if (el.matches && el.matches('.mid input')){
+    var err = $(el.id + '-err');
+    if (err && !err.hidden){ err.hidden = true; syncInputs(true); }
+  }
+});
+document.addEventListener('change', function(e){
+  var el = e.target;
+  if (el.type === 'radio' && el.checked){
+    S[el.name] = (el.name === 'meals') ? +el.value : el.value;
+    var lab = document.querySelector('label[for="' + el.id + '"]');
+    if (lab) playOnce(lab, 'pop', 420);
+    S.example = false;
+    update();
+  }
+});
+document.addEventListener('click', function(e){
+  var prog = $('progress');
+  if (prog.classList.contains('open') && !prog.contains(e.target)) setPanel(false);
+  var el = e.target.closest ? e.target.closest('button') : null;
+  if (!el) return;
+  if (el.id === 'pbarBtn'){ setPanel(!prog.classList.contains('open')); return; }
+  if (el.id === 'themeBtn'){
+    S.theme = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    applyTheme(); save();
+    return;
+  }
+  if (el.hasAttribute('data-lang')){
+    S.lang = el.getAttribute('data-lang');
+    applyStatic(); update();
+    if (S.step === 5 && openStrip) renderStrip();
+    return;
+  }
+  if (el.classList.contains('step-btn')){ stepBtn(el); return; }
+  if (el.hasAttribute('data-go')){ go(+el.getAttribute('data-go'), el.hasAttribute('data-next')); return; }
+  if (el.id === 'saveBtn'){ doSave(el); return; }
+  if (el.id === 'pvBtn'){ setPreview(!$('cardPreview').classList.contains('open')); return; }
+  if (el.id === 'pickPattern'){ toggleStrip('pattern'); return; }
+  if (el.id === 'pickColour'){ toggleStrip('colour'); return; }
+  if (el.id === 'rebake'){ setCake(KekLapis.rebake(S.cake), true); return; }
+  if (el.classList.contains('opt')){ var oi = +el.getAttribute('data-i'); setCake(el.getAttribute('data-kind') === 'pattern' ? KekLapis.withPattern(S.cake, oi) : KekLapis.withPalette(S.cake, oi), false); return; }
+  if (el.id === 'restartBtn'){ $('confirmRow').hidden = false; $('confirmNo').focus(); return; }
+  if (el.id === 'confirmNo'){ $('confirmRow').hidden = true; $('restartBtn').focus(); return; }
+  if (el.id === 'confirmYes'){
+    var lang = S.lang, theme = S.theme, cake = S.cake;
+    S = fresh(); S.lang = lang; S.theme = theme; S.cake = cake;
+    lastVal = {}; plateFrom = [0,0,0];
+    ['age','height','weight','goal'].forEach(function(k){ var er = $(k + '-err'); if (er) er.hidden = true; });
+    applyStatic(); go(1);
+    return;
+  }
+});
+document.addEventListener('focusin', function(e){
+  var el = e.target;
+  if (el.matches && el.matches('.mid input')){
+    setTimeout(function(){
+      if (document.activeElement !== el) return;
+      try { el.setSelectionRange(0, el.value.length); } catch (err) { try { el.select(); } catch (err2) {} }
+    }, 0);
+  }
+});
+var NEXT_FIELD = {age: 'height', height: 'weight'};
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && e.target.matches && e.target.matches('.mid input')){
+    e.preventDefault();
+    var nx = NEXT_FIELD[e.target.id] && $(NEXT_FIELD[e.target.id]);
+    if (nx) nx.focus(); else e.target.blur();
+  }
+  if (e.key === 'Escape' && $('progress').classList.contains('open')){ setPanel(false); $('pbarBtn').focus(); }
+});
+
+/* Shrink the phone bar once the page scrolls under it. Two thresholds 40px apart, so the bar's own
+   height change (about 16px) can never flip it back and forth. */
+var stuck = false, scrollTick = false;
+function sentinelY(){ return $('sentinel').getBoundingClientRect().top + window.pageYOffset; }
+function checkStuck(){
+  scrollTick = false;
+  var y = window.pageYOffset, s = sentinelY();
+  if (!stuck && y > s + 40){ stuck = true; $('progress').classList.add('stuck'); }
+  else if (stuck && y < s){ stuck = false; $('progress').classList.remove('stuck'); }
+}
+window.addEventListener('scroll', function(){ if (!scrollTick){ scrollTick = true; requestAnimationFrame(checkStuck); } }, {passive: true});
+
+/* ---------- Boot ---------- */
+applyStatic();
+syncInputs(true);
+for (var i = 1; i <= 5; i++) $('s' + i).hidden = (i !== S.step);
+update();
+var resizeTimer = 0;
+window.addEventListener('resize', function(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(function(){ if (S.step === 5) renderCake(); }, 200); });
+})();
+</script>
+</body>
+</html>
