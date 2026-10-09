@@ -1765,14 +1765,6 @@ function fontsReady(){
   var all = Promise.all(specs.map(function(s){ return document.fonts.load(s).catch(function(){}); }));
   return Promise.race([all, new Promise(function(r){ setTimeout(r, 2500); })]);
 }
-function siteLabel(){
-  try {
-    if (window.claude) return '';
-    if (!/^https?:$/.test(location.protocol)) return '';
-    var p = location.pathname.replace(/index\.html?$/, '');
-    return (location.host + p).replace(/\/$/, '');
-  } catch (e) { return ''; }
-}
 function halfTxt(v){ var n = Math.max(0.5, Math.round(v*2)/2), w = Math.floor(n); return (w ? String(w) : '') + (n > w ? '½' : ''); }
 function goalParts(P){
   if (P.mode === 'keep') return {delta:'', when:''};
@@ -1783,7 +1775,7 @@ function cardData(P){
   return {lang: S.lang, kcalText: fmt(r10(P.target)), p: fmt(r5(P.protG)), f: fmt(r5(P.fatG)), c: fmt(r5(P.carbG)),
           pp: P.pP, pf: P.pF, pc: P.pC, meals: m, mealP: fmt(P.protG/m), mealC: fmt(P.carbG/m), mealF: fmt(P.fatG/m),
           palms: P.protG/m/PALM_G, rice: P.carbG/m/RICE_CUP_G, oil: P.fatG/m/OIL_TBSP_G, mealKcal: fmt(r10(P.mealKcal)),
-          goalDelta: g.delta, goalWhen: g.when, mode: P.mode, site: siteLabel()};
+          goalDelta: g.delta, goalWhen: g.when, mode: P.mode, site: ''};
 }
 var cardBlob = null, cardURL = '', cardToken = 0, cardTimer = 0;
 function makeCard(){
