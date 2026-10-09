@@ -2071,14 +2071,17 @@ function setVal(k, v){
   else if (S.goalAuto && S.goal != null && (k === 'weight' || k === 'height')){ S.goal = suggestGoal(S); syncInputs(); }
   update();
 }
+var errTimer = {}, badField = {};
+function laterErr(k, msg){ badField[k] = true; errTimer[k] = setTimeout(function(){ showErr(k, msg); }, 1100); }
 function onNum(el){
   var k = el.id, R = RANGE[k];
   var raw = String(el.value).trim().replace(',', '.');
   var v = parseFloat(raw);
-  if (raw === '' || !isFinite(v)) return showErr(k, t('errRange', {min: R[0], max: R[1]}));
-  if (k === 'age' && v < 18) return showErr(k, t('errAdult'));
-  if (v < R[0] || v > R[1]) return showErr(k, t('errRange', {min: R[0], max: R[1]}));
-  $(k + '-err').hidden = true;
+  clearTimeout(errTimer[k]); $(k + '-err').hidden = true;
+  if (raw === '' || !isFinite(v)) return laterErr(k, t('errRange', {min: R[0], max: R[1]}));
+  if (k === 'age' && v < 18) return laterErr(k, t('errAdult'));
+  if (v < R[0] || v > R[1]) return laterErr(k, t('errRange', {min: R[0], max: R[1]}));
+  badField[k] = false;
   v = (k === 'age' || k === 'height') ? Math.round(v) : Math.round(v*10)/10;
   setVal(k, v);
 }
@@ -2087,7 +2090,7 @@ function stepBtn(btn){
   var cur = (k === 'goal') ? goalValue() : S[k];
   var v = Math.min(R[1], Math.max(R[0], Math.round((cur + dir*R[2])*10)/10));
   $(k).value = (k === 'weight' || k === 'goal') ? fmt1(v) : String(v);
-  $(k + '-err').hidden = true;
+  $(k + '-err').hidden = true; clearTimeout(errTimer[k]); badField[k] = false;
   playOnce($(k), 'bump', 360);
   setVal(k, v);
 }
@@ -2099,7 +2102,8 @@ document.addEventListener('focusout', function(e){
   var el = e.target;
   if (el.matches && el.matches('.mid input')){
     var err = $(el.id + '-err');
-    if (err && !err.hidden){ err.hidden = true; syncInputs(true); }
+    clearTimeout(errTimer[el.id]);
+    if (err && (badField[el.id] || !err.hidden)){ err.hidden = true; badField[el.id] = false; syncInputs(true); }
   }
 });
 document.addEventListener('change', function(e){
