@@ -1207,7 +1207,7 @@ var T = {
     patternList:"Pilih corak", colourList:"Pilih warna", cakeAlt:"Kek lapis anda: corak {n}, warna {c}.",
     eachMeal:"Setiap hidangan · {n} sehari",
     palmN:"{n} tapak tangan", palmSub:"protein · {g} g", riceN:"{n} cawan nasi", riceSub:"karbohidrat · {g} g",
-    oilN:"{n} sudu besar minyak", oilSub:"lemak · {g} g", perDay:"Sehari", goalRow:"Matlamat", goalBy:"{d} menjelang {w}", goalKeep:"Kekalkan berat",
+    oilN:"{n} sudu besar minyak", oilSub:"lemak · {g} g", dayLabel:"Sehari", goalRow:"Matlamat", goalBy:"{d} menjelang {w}", goalKeep:"Kekalkan berat",
     portionNote:"Nasi dan minyak hanyalah panduan kasar, seolah-olah semua karbohidrat datang daripada nasi dan semua lemak daripada minyak.",
     previewLabel:"Gambar yang akan disimpan", previewSub:"Kek dan sasaran anda dalam satu gambar, sedia untuk galeri atau media sosial.",
     save:"Simpan gambar", saving:"Menyediakan gambar…",
@@ -1308,7 +1308,7 @@ var T = {
     patternList:"Choose a pattern", colourList:"Choose colours", cakeAlt:"Your kek lapis: {n} pattern, {c} colours.",
     eachMeal:"Each meal · {n} a day",
     palmN:"{n} palms of protein", palmN_1:"{n} palm of protein", palmSub:"protein · {g} g", riceN:"{n} cups of rice", riceN_1:"{n} cup of rice", riceSub:"carbs · {g} g",
-    oilN:"{n} tbsp of oil", oilSub:"fat · {g} g", perDay:"A day", goalRow:"Goal", goalBy:"{d} by {w}", goalKeep:"Keep my weight",
+    oilN:"{n} tbsp of oil", oilSub:"fat · {g} g", dayLabel:"A day", goalRow:"Goal", goalBy:"{d} by {w}", goalKeep:"Keep my weight",
     portionNote:"Rice and oil are rough guides, as if all your carbs came from rice and all your fat from oil.",
     previewLabel:"The picture you'll save", previewSub:"Your cake and targets in one picture, ready for your gallery or social media.",
     save:"Save image", saving:"Preparing image…",
@@ -1845,7 +1845,7 @@ function reward5(P){
   h += pItem('c', portionTxt('riceN', P.carbG/m/RICE_CUP_G), t('riceSub', {g: fmt(P.carbG/m)}));
   h += pItem('f', portionTxt('oilN', P.fatG/m/OIL_TBSP_G), t('oilSub', {g: fmt(P.fatG/m)}));
   h += '</ul><dl class="rows">' + row(t('mealKcal'), t('mealKcalVal', {x: fmt(r10(P.mealKcal))})) + '</dl>';
-  h += '<div class="day"><p class="day-h"><span>' + esc(t('perDay')) + '</span><b>' + fmt(r10(P.target)) + ' kcal</b></p>';
+  h += '<div class="day"><p class="day-h"><span>' + esc(t('dayLabel')) + '</span><b>' + fmt(r10(P.target)) + ' kcal</b></p>';
   h += '<div class="mbar" aria-hidden="true"><i class="d-p" style="flex-grow:' + P.pP + '"></i><i class="d-f" style="flex-grow:' + P.pF + '"></i><i class="d-c" style="flex-grow:' + P.pC + '"></i></div>';
   h += '<ul class="mleg"><li><span class="dot d-p" aria-hidden="true"></span>' + esc(t('mProtein')) + ' <b>' + fmt(r5(P.protG)) + ' g</b></li>' +
        '<li><span class="dot d-f" aria-hidden="true"></span>' + esc(t('mFat')) + ' <b>' + fmt(r5(P.fatG)) + ' g</b></li>' +
