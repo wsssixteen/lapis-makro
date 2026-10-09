@@ -1904,7 +1904,7 @@ function bakeCake(){
     $('live').textContent = $('cakeName').textContent;
   }, 1250);
 }
-var openStrip = null;
+var openStrip = null, stripToken = 0;
 function toggleStrip(kind){
   openStrip = (openStrip === kind) ? null : kind;
   $('pickPattern').setAttribute('aria-expanded', String(openStrip === 'pattern'));
@@ -1919,10 +1919,16 @@ function renderStrip(){
   strip.innerHTML = list.map(function(it, i){
     return '<button type="button" class="opt" aria-pressed="false" data-kind="' + kind + '" data-i="' + i + '"><canvas width="' + px + '" height="' + px + '" aria-hidden="true"></canvas><span>' + esc(it[S.lang] || it.ms) + '</span></button>';
   }).join('');
-  Array.prototype.forEach.call(strip.querySelectorAll('canvas'), function(cv, i){
-    var code = kind === 'pattern' ? KekLapis.withPattern(S.cake, i) : KekLapis.withPalette(S.cake, i);
-    KekLapis.drawSlice(cv.getContext('2d'), 0, 0, px, KekLapis.design(code));
-  });
+  var cvs = strip.querySelectorAll('canvas'), next = 0, token = ++stripToken, cake = S.cake;
+  function batch(){
+    if (token !== stripToken) return;
+    for (var end = Math.min(cvs.length, next + 3); next < end; next++){
+      var code = kind === 'pattern' ? KekLapis.withPattern(cake, next) : KekLapis.withPalette(cake, next);
+      KekLapis.drawSlice(cvs[next].getContext('2d'), 0, 0, px, KekLapis.design(code));
+    }
+    if (next < cvs.length) requestAnimationFrame(batch);
+  }
+  batch();
   markStrip();
 }
 function markStrip(){
